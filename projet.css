@@ -9,8 +9,8 @@ h1{
 }
 .table{
   background-image:url("Img/table.png");
-  background-size: 1550px;
+  background-size: cover;
   background-repeat: no-repeat;
-  height:850px;
+  height :900px;
   text-align: center;
 }
