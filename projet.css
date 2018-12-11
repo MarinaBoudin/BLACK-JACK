@@ -15,11 +15,14 @@ h1{
   text-align: center;
 }
 .info{
-  padding-top: 15%;
+  padding-top: 8%;
   color: white;
 }
 body{
   background-color: grey;
   color:black;
   font-family: "Comic Sans MS",sans-serif;
+}
+.card{
+  width:150px;
 }
