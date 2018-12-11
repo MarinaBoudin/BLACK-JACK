@@ -14,3 +14,12 @@ h1{
   height :900px;
   text-align: center;
 }
+.info{
+  padding-top: 15%;
+  color: white;
+}
+body{
+  background-color: grey;
+  color:black;
+  font-family: "ComicSansMS";
+}
