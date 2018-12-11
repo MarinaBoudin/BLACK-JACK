@@ -79,11 +79,11 @@ function setUplistener(){
 }
 
 
-var carte=["Img/AK1.BMP","Img/AP1.BMP","Img/AT1.BMP","Img/AC1.BMP","Img/C2.BMP","Img/C6.BMP","Img/C7.BMP","Img/C8.BMP","Img/C9.BMP","Img/C10.BMP","Img/C3.BMP","Img/C4.BMP"
-	   ,"Img/C5.BMP","Img/DC10.BMP","Img/DK10.BMP","Img/DP10.BMP","Img/DT10.BMP","Img/K2.BMP","Img/K3.BMP","Img/K4.BMP","Img/K5.BMP","Img/K6.BMP","Img/K7.BMP","Img/K8.BMP",
-	   "Img/K9.BMP","Img/K10.BMP","Img/P2.BMP","Img/P3.BMP","Img/P4.BMP","Img/P5.BMP","Img/P6.BMP","Img/P7.BMP","Img/P8.BMP","Img/P9.BMP","Img/P10.BMP","Img/RC10.BMP","Img/RK10.BMP",
-	   "Img/RP10.BMP","Img/RT10.BMP","Img/T2.BMP","Img/T3.BMP","Img/T4.BMP","Img/T6.BMP","Img/T7.BMP","Img/T8.BMP","Img/T9.BMP","Img/T10.BMP","Img/VC10.BMP","Img/VK10.BMP","Img/VP10.BMP",
-	   "Img/VT10.BMP","Img/T5.BMP"]
+var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png","Img/C6.png","Img/C7.png","Img/C8.png","Img/C9.png","Img/C10.png","Img/C3.png","Img/C4.png"
+	   ,"Img/C5.png","Img/DC10.png","Img/DK10.png","Img/DP10.png","Img/DT10.png","Img/K2.png","Img/K3.png","Img/K4.png","Img/K5.png","Img/K6.png","Img/K7.png","Img/K8.png",
+	   "Img/K9.png","Img/K10.png","Img/P2.png","Img/P3.png","Img/P4.png","Img/P5.png","Img/P6.png","Img/P7.png","Img/P8.png","Img/P9.png","Img/P10.png","Img/RC10.png","Img/RK10.png",
+	   "Img/RP10.png","Img/RT10.png","Img/T2.png","Img/T3.png","Img/T4.png","Img/T6.png","Img/T7.png","Img/T8.png","Img/T9.png","Img/T10.png","Img/VC10.png","Img/VK10.png","Img/VP10.png",
+	   "Img/VT10.png","Img/T5.png"]
 
 var id=[];
 var min=0;
