@@ -48,6 +48,12 @@ function addImgInDiv() {
 	nbCardD++;
     	if(nbCardD>=6){
 	    scored.textContent=scoreD;
+	    if(scoreD<score<42){
+		window.alert("Défaite");
+	    }
+	    else{
+		window.alert("Congratulations");
+	    }
 	}
     }
     else{

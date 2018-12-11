@@ -11,16 +11,16 @@
     <div class="info">
       <div id="Croupier">
         <h2>Dealer's cards :</h2>
-        <img src="" id="dealer">
+        <img src="Img/1.BMP" id="dealer">
       </div>
       <div id="Joueur">
         <h2>Your cards : </h2>
-        <img src="" id="your">
+        <img src="Img/2.BMP" id="your">
       </div>
     </div>
   </div>
-  <p class="fin"> The dealer has <span id="score_croupier">0</span> points</p>
-  <p class="fin"> You have <span id="score_joueur">0</span> points. Card or stay ?</p>
+  <p class="fin"> The dealer has <p id="score_croupier">8</p> points</p>
+  <p class="fin"> You have <p id="score_joueur">10</p> points. Card or stay ?</p>
   <div class="bouttons">
     <button type="submit" id="Card">Card</button>
     <button type="submit" id="Stay">Stay</button>
