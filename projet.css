@@ -7,3 +7,10 @@ h1{
 .bouttons{
   text-align: center;
 }
+.table{
+  background-image:url("Img/table.png");
+  background-size: 1550px;
+  background-repeat: no-repeat;
+  height:850px;
+  text-align: center;
+}
