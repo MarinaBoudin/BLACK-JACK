@@ -1,4 +1,3 @@
-
 function random(){
     var idx=Math.floor(Math.random() * (max - min +1)) + min;
     while(id.includes(idx)===true){
@@ -23,12 +22,43 @@ function Score(index,sc){
     }
     else if(sc>42){
 	window.alert("Défaite");
+	location.reload();
     }
 }
 
 function addImgInDiv() {
     if(id.length!==52){
-	if(this.id==="Card"){
+	if(this.id==="Stay"){
+	    while(scoreD<score===true){
+		idxD=random();
+		var pathC = "Img/arriere.png";
+		var newImgC = createImg(pathC);
+		var divC = document.getElementById("Croupier");
+		var scored=document.getElementById("score_croupier");
+		divC.appendChild(newImgC);
+		scoreD=Score(idxD,scoreD);
+		nbCardD++;
+	    }
+	    scored.textContent=scoreD;
+	    if(scoreD<42 && score<42){
+		if(scoreD<score){
+		    window.alert("Congratulations");
+		}
+		else if(score===scoreD){
+		    window.alert("Congratulations");
+		}
+		else{
+		    window.alert("Defaite");
+		    }
+		}
+	    else if(scoreD>42 && score<42){
+		window.alert("Défaite du Croupier \n Vous avez gagné")
+	    }
+	    else{
+		window.alert("Défaite du Croupier")
+	    }
+	}
+	else if(this.id==="Card"){
 	    idxJ=random();
 	    var pathJ = carte[idxJ];
 	    var newImgJ = createImg(pathJ);
@@ -38,34 +68,13 @@ function addImgInDiv() {
 	    score=Score(idxJ,score);
 	    scorej.textContent=score;
 	    nbCardJ++;
-	}
-	idxD=random();
-	var pathC = "Img/cat.png";
-	var newImgC = createImg(pathC);
-	var divC = document.getElementById("Croupier");
-	var scored=document.getElementById("score_croupier");
-	divC.appendChild(newImgC);
-	scoreD=Score(idxD,scoreD);
-	nbCardD++;
-    	if(nbCardD>6){
-	    scored.textContent=scoreD;
-	    if(scoreD<score<42){
-		window.alert("Défaite");
-	    }
-	    else{
+	    if(score===42){
 		window.alert("Congratulations");
 	    }
+	    else if(score>42){
+		window.alert("Defaite");
+	    }
 	}
-    }
-    else{
-	window.alert("Plus de cartes");
-    }
-}
-
-
-function croupcard(){
-    for(var i=0;nbCardD<6;i++){
-	addImgInDiv()
     }
 }
 
@@ -81,8 +90,9 @@ function setUplistener(){
     var newcard=document.getElementById("Card");
     newcard.addEventListener("click",addImgInDiv);
     var stay=document.getElementById("Stay");
-    stay.addEventListener("click",croupcard);
+    stay.addEventListener("click",addImgInDiv);
     var start=document.getElementById("Start again");
+    start.addEventListener("click",function(){location.reload()});
 }
 
 
@@ -98,8 +108,8 @@ var max=carte.length-1;
 var score=0;
 var scoreD=0;
 var value=0;
-var nbCardD=0;
-var nbCardJ=0;
+var nbCardD=1;
+var nbCardJ=1;
 
 
-window.onload=setUplistener()
+window.onload=setUplistener
