@@ -1,6 +1,7 @@
 h1{
     text-align: center;
     color: #cc0000;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 .fin{
   text-align: center;
@@ -9,6 +10,7 @@ h1{
     background-color: black;
     text-align: center;
     color: white;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 .table{
   background-color: black;
@@ -23,6 +25,7 @@ h1{
 .info{
   padding-top: 8%;
   color: white;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 body{
   background-image:url("Img/bacat.jpg");
@@ -32,3 +35,23 @@ body{
 img{
   width:150px;
 }
+button{
+     background-color: #cc0000;
+     border: none;
+     color: white;
+     padding: 16px 32px;
+     text-align: center;
+     font-size: 16px;
+     margin: 4px 2px;
+     opacity: 100;
+     transition: 0.3s;
+     display: inline-block;
+     text-decoration: none;
+     cursor: pointer;
+     font-family: "Trebuchet MS", Helvetica, sans-serif;
+     display: inline-block;
+     border-radius: 4px;
+     width: 200px;
+     transition: all 0.5s;
+}
+
