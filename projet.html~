@@ -19,9 +19,9 @@
       </div>
     </div>
   </div>
+  <p class="fin"> The dealer has <span id="score_croupier">0</span> points</p>
+  <p class="fin"> You have <span id="score_joueur">0</span> points. Card or stay ?</p>
   <div class="bouttons">
-    <p class="fin"> The dealer has <span id="score_croupier">0</span> points</p>
-    <p class="fin"> You have <span id="score_joueur">0</span> points. Card or stay ?</p>
     <button type="submit" id="Card">Card</button>
     <button type="submit" id="Stay">Stay</button>
     <button type="submit" id="Start again">Start again</button>
