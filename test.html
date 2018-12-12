@@ -6,17 +6,28 @@
     <title>Miaou</title>
   </head>
   <body>
-    <div id="Image">
-      <img class="omnia" id="omnia" src="Img/omnia.jpg"></img>
+    <h1>Questionnaire</h1>
+    <div class="Zone">
+      <div id="Image">
+	<img class="omnia" id="omnia" src="Img/omnia.jpg"></img>
+      </div>
+      <div id="Question">
+	<p>Est-ce que ceci est beaucoup trop mignon ?</p>
+      </div>
+      <form action="">
+	<input type="radio" name="answer" class="test" value="Oui">Oui<br>
+	<input type="radio" name="answer" class="test" value="Non">Non<br>
+	<input type="radio" name="answer" class="test" value="idk">Je ne sais pas
+      </form>
+      <div class="Reponse">
+	<p id="rep"></p>
+      </div>
     </div>
-    <div id="Question">
-      <p>Sommes nous-réellement allergique aux poils de chat ?</p>
+    <div class="Button">
+      <button type="submit" value="Previous">Previous</button>
+      <button type="submit" value="Next">Next</button>
     </div>
-    <form action="">
-      <input type="radio" name="answer" class="test" value="Oui">Oui<br>
-      <input type="radio" name="answer" class="test" value="Non">Non<br>
-      <input type="radio" name="answer" class="test" value="Non">Je ne sais pas
-    </form>
     <script src="test.js"></script>
-    </body>
+  </body>
+  
 </html>

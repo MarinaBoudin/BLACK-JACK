@@ -1,13 +1,19 @@
 function answer(){
+    var img=document.getElementById("omnia");
+    var rep=document.getElementById("rep");
     if(this.value==="Oui"){
-	var img=document.getElementById("omnia")
-	img.src="Img/bonne.gif"
+	img.src="Img/bonne.JPG"
     }
     else if(this.value==="Non"){
-	var img=document.getElementById("omnia")
-	img.src="Img/mauvaise.gif"
+	img.src="Img/mauvaise.JPG"
+	rep.textContent="Mais ... mais ...elle est trop chou non ???"
+    }
+    else{
+	img.src="Img/idk.gif"
+	rep.textContent="Je suis sûre que vous savez !!"
     }
 }
+    
 
 function setUplistener(){
     var radio=document.getElementsByClassName("test");

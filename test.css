@@ -1,8 +1,47 @@
+h1{
+    text-align: center;
+    color: #cc0000;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
 img.omnia{
     heigth: 300px;
     width: 300px;
 }
 
 body{
-    text-align: center;
+  background-image:url("Img/bacat.jpg");
+  color:black;
+  font-family: "Comic Sans MS",sans-serif;
+  text-align: center;
+}
+
+div.Zone{
+    margin-left: 30%;
+    margin-right: 30%;
+    background: black;
+    color: white;
+}
+div.Reponse{
+    color: #cc0000;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+button{
+     background-color: #cc0000;
+     border: none;
+     color: white;
+     padding: 16px 32px;
+     text-align: center;
+     font-size: 16px;
+     margin: 4px 2px;
+     opacity: 100;
+     transition: 0.3s;
+     display: inline-block;
+     text-decoration: none;
+     cursor: pointer;
+     font-family: "Trebuchet MS", Helvetica, sans-serif;
+     display: inline-block;
+     border-radius: 4px;
+     width: 200px;
+     transition: all 0.5s;
 }
