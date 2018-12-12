@@ -12,6 +12,7 @@ var movetop = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]-1][pos[1]];
   if (new_position!=0){
+    play(plateau[pos[0]-1][pos[1]]);
     plateau[pos[0]-1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   }
@@ -21,6 +22,7 @@ var movebottom = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]+1][pos[1]];
   if (new_position!=0){
+    play(plateau[pos[0]+1][pos[1]]);
     plateau[pos[0]+1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   }
@@ -30,6 +32,7 @@ var moveleft = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]-1];
   if (new_position!=0){
+    play(plateau[pos[0]][pos[1]-1]);
     plateau[pos[0]][pos[1]-1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   }
@@ -39,10 +42,19 @@ var moveright = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]+1];
   if (new_position!=0){
+    play(plateau[pos[0]][pos[1]+1]);
     plateau[pos[0]][pos[1]+1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   }
   affichage(plateau);
+}
+var play = function(type){
+  if (type===4){
+    var gameboard = document.getElementById("gameboard");
+    var cat = document.getElementById("blackcat");
+    gameboard.style.display="none";
+    blackcat.style.display="block";
+  }
 }
 var affichage = function(plateau){
   var tree = document.getElementById("gameboard");
