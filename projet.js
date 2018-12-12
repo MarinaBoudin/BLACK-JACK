@@ -1,3 +1,4 @@
+
 function random(){
     var idx=Math.floor(Math.random() * (max - min +1)) + min;
     while(id.includes(idx)===true){
