@@ -62,3 +62,7 @@ button{
   background-color: black;
   padding:0%;
 }
+.plateau{
+  width:1550px;
+  height: 600px;
+}

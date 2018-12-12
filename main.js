@@ -45,7 +45,8 @@ var setupListener = function(plateau,base){
         }
         newDiv.style.width="50px";
         newDiv.style.height="50px";
-        document.body.appendChild(newDiv);
+        var div = document.getElementById("plateau");
+        div.appendChild(newDiv);
       }
     }
   }
