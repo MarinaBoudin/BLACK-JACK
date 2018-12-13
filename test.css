@@ -45,3 +45,9 @@ button{
      width: 200px;
      transition: all 0.5s;
 }
+
+.sc{
+    color: #cc0000;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+    
