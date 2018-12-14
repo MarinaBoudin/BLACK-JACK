@@ -1,7 +1,86 @@
-h1{
+.title{
+    text-align: center;
+    color: #cc0000;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.fin{
+  text-align: center;
+}
+.bouttons{
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.table{
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height :800px;
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2.5%;
+}
+.info{
+  padding-top: 8%;
+  color: white;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.deco{
+  background-image:url("Img/bacat.jpg");
+  color:black;
+  font-family: "Comic Sans MS",sans-serif;
+  text-align:center;
+  padding-bottom: 10%;
+}
+img{
+  width:150px;
+}
+button{
+     background-color: #cc0000;
+     border: none;
+     color: white;
+     padding: 16px 32px;
+     text-align: center;
+     font-size: 16px;
+     margin: 4px 2px;
+     opacity: 100;
+     transition: 0.3s;
+     display: inline-block;
+     text-decoration: none;
+     cursor: pointer;
+     font-family: "Trebuchet MS", Helvetica, sans-serif;
+     display: inline-block;
+     border-radius: 4px;
+     width: 200px;
+     transition: all 0.5s;
+}
+.treetitle{
     text-align: center;
     color: #cc0000;
 }
-body{
+.deco2{
   background-color: black;
+  padding:0%;
+  text-align: center;
+}
+.plateau{
+  width:1550px;
+  height: 600px;
+
+}
+.omnia{
+  height: 300px;
+  width: 300px;
+}
+.Zone{
+  margin-left: 30%;
+  margin-right: 30%;
+  background: black;
+  color: white;
+}
+.Reponse{
+  color: #cc0000;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
