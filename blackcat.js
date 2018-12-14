@@ -30,6 +30,7 @@ var startagain=function(){
   var longueur = divJ.childNodes.length;
   for (var k = 3; k<longueur;k++){
     divJ.removeChild(divJ.childNodes[3]);
+    console.log(divJ.childNodes)
   }
   var divC = document.getElementById("Croupier");
   var longueur = divC.childNodes.length;
@@ -70,23 +71,41 @@ function addImgInDiv() {
         scoreD=Score(idxD,scoreD);
         nbCardD++;
       }
+      var scored = document.getElementById("score_croupier");
       scored.textContent=scoreD;
       if(scoreD<42 && score<42){
         if(scoreD<score){
           window.alert("Congratulations");
+          var gameboard = document.getElementById("gameboard");
+          var cat = document.getElementById("blackcat");
+          gameboard.style.display="block";
+          blackcat.style.display="none";
         }
         else if(score===scoreD){
           window.alert("Congratulations");
+          var gameboard = document.getElementById("gameboard");
+          var cat = document.getElementById("blackcat");
+          gameboard.style.display="block";
+          blackcat.style.display="none";
         }
         else{
           window.alert("Defaite");
+          startagain();
         }
       }
       else if(scoreD>42 && score<42){
         window.alert("Défaite du Croupier \n Vous avez gagné")
+        var gameboard = document.getElementById("gameboard");
+        var cat = document.getElementById("blackcat");
+        gameboard.style.display="block";
+        blackcat.style.display="none";
       }
       else{
         window.alert("Défaite du Croupier")
+        var gameboard = document.getElementById("gameboard");
+        var cat = document.getElementById("blackcat");
+        gameboard.style.display="block";
+        blackcat.style.display="none";
       }
     }
     else if(this.id==="Card"){
@@ -101,9 +120,14 @@ function addImgInDiv() {
       nbCardJ++;
       if(score===42){
         window.alert("Congratulations");
+        var gameboard = document.getElementById("gameboard");
+        var cat = document.getElementById("blackcat");
+        gameboard.style.display="block";
+        blackcat.style.display="none";
       }
       else if(score>42){
         window.alert("Defaite");
+        startagain();
       }
     }
   }

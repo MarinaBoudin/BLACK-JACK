@@ -12,9 +12,16 @@ var movetop = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]-1][pos[1]];
   if (new_position!=0){
-    play(plateau[pos[0]-1][pos[1]]);
+    if ((typeof new_position)=="object"){
+      condition=[plateau[pos[0]-1][pos[1]][0],plateau[pos[0]-1][pos[1]][1]];
+    }
+    else{
+      condition=new_position;
+    }
     plateau[pos[0]-1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
+    affichage(plateau);
+    play(condition);
   }
   affichage(plateau);
 }
@@ -22,9 +29,16 @@ var movebottom = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]+1][pos[1]];
   if (new_position!=0){
-    play(plateau[pos[0]+1][pos[1]]);
+    if ((typeof new_position)=="object"){
+      condition=[plateau[pos[0]+1][pos[1]][0],plateau[pos[0]+1][pos[1]][1]];
+    }
+    else{
+      condition=new_position;
+    }
     plateau[pos[0]+1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
+    affichage(plateau);
+    play(condition);
   }
   affichage(plateau);
 }
@@ -40,7 +54,6 @@ var moveleft = function(plateau,base){
     }
     plateau[pos[0]][pos[1]-1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    console.log(plateau[pos[0]][pos[1]]);
     affichage(plateau);
     play(condition);
   }
@@ -50,9 +63,16 @@ var moveright = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]+1];
   if (new_position!=0){
-    play(plateau[pos[0]][pos[1]+1]);
+    if ((typeof new_position)=="object"){
+      condition=[plateau[pos[0]][pos[1]+1][0],plateau[pos[0]][pos[1]+1][1]];
+    }
+    else{
+      condition=new_position;
+    }
     plateau[pos[0]][pos[1]+1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
+    affichage(plateau);
+    play(condition);
   }
   affichage(plateau);
 }
@@ -60,7 +80,6 @@ var answer = function(a){
   var img=document.getElementById("omnia");
   var rep=document.getElementById("rep");
   var next =document.getElementById("Next");
-  console.log(this)
   if(this.value==="Oui"){
     img.src="Img/Question/bonne.JPG";
     next.style.display="block";
@@ -113,7 +132,7 @@ var quizzy = function(a){
   next.addEventListener("click",function(){play(0)});
 }
 var play = function(type){
-  if (type[0]===4){
+  if (type===4){
     var gameboard = document.getElementById("gameboard");
     var cat = document.getElementById("blackcat");
     gameboard.style.display="none";
@@ -161,12 +180,12 @@ var affichage = function(plateau){
         else if (column===7){
           canvas_grid.style.backgroundColor="yellow";
         }
+        else if (column==4){
+          canvas_grid.style.backgroundColor="#cc0000";
+        }
         else if ((typeof column)=="object"){
           if (column[0]===3) {
             canvas_grid.style.backgroundColor="#7300e6";
-          }
-          else if (column[0]==4){
-            canvas_grid.style.backgroundColor="#cc0000";
           }
           else if (column[0]==5){
             canvas_grid.style.backgroundColor="#4c4c34";
@@ -199,14 +218,14 @@ var setupListener = function(plateau,base){
 }
 var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,[3,6],0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,[3,1],0,0,0,0],
-[0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,0,[3,9],0,1,6,1,1,1,0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,6,1,1,1,0,0,0,1,0,0,0,0,6,0],
-[0,0,0,0,6,0,0,0,0,[3,4],0,0,0,6,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,0],
+[0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,0,[3,9],0,1,4,1,1,1,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,4,1,1,1,0,0,0,1,0,0,0,0,4,0],
+[0,0,0,0,4,0,0,0,0,[3,4],0,0,0,4,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,0],
 [0,0,0,0,1,0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,[3,8],0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,6,0,0,0,0,0,1,1,[3,7],1,1,1,1,6,1,1,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,4,0,0,0,0,0,1,1,[3,7],1,1,1,1,4,1,1,0,0,0,0],
 [0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,1,1,1,[3,2],1,1,1,1,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,[3,0],1,1,1,[4,1],1,1,1,1,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,1,1,1,[3,2],1,1,1,1,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,[3,0],1,1,1,4,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
