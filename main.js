@@ -82,12 +82,12 @@ var answer = function(a){
   var next =document.getElementById("Next");
   if(this.value==="Oui"){
     img.src="Img/Question/bonne.JPG";
-    next.style.display="block";
+    next.style.display="inline-block";
     rep.style.display="block";
   }
   else if(this.value==="Non"){
     img.src="Img/Question/mauvaise.JPG";
-    next.style.display="block";
+    next.style.display="inline-block";
     rep.style.display="block";
   }
   else if (this.value==="IDK"){

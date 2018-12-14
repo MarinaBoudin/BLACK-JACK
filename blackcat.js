@@ -76,6 +76,7 @@ function addImgInDiv() {
       if(scoreD<42 && score<42){
         if(scoreD<score){
           window.alert("Congratulations");
+          startagain();
           var gameboard = document.getElementById("gameboard");
           var cat = document.getElementById("blackcat");
           gameboard.style.display="block";
@@ -83,6 +84,7 @@ function addImgInDiv() {
         }
         else if(score===scoreD){
           window.alert("Congratulations");
+          startagain();
           var gameboard = document.getElementById("gameboard");
           var cat = document.getElementById("blackcat");
           gameboard.style.display="block";
@@ -95,6 +97,7 @@ function addImgInDiv() {
       }
       else if(scoreD>42 && score<42){
         window.alert("Défaite du Croupier \n Vous avez gagné")
+        startagain();
         var gameboard = document.getElementById("gameboard");
         var cat = document.getElementById("blackcat");
         gameboard.style.display="block";
@@ -102,6 +105,7 @@ function addImgInDiv() {
       }
       else{
         window.alert("Défaite du Croupier")
+        startagain();
         var gameboard = document.getElementById("gameboard");
         var cat = document.getElementById("blackcat");
         gameboard.style.display="block";
@@ -120,6 +124,7 @@ function addImgInDiv() {
       nbCardJ++;
       if(score===42){
         window.alert("Congratulations");
+        startagain();
         var gameboard = document.getElementById("gameboard");
         var cat = document.getElementById("blackcat");
         gameboard.style.display="block";
