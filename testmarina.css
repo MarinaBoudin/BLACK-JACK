@@ -31,6 +31,8 @@
   background-image:url("Img/bacat.jpg");
   color:black;
   font-family: "Comic Sans MS",sans-serif;
+  text-align:center;
+  padding-bottom: 10%;
 }
 img{
   width:150px;
@@ -61,8 +63,24 @@ button{
 .deco2{
   background-color: black;
   padding:0%;
+  text-align: center;
 }
 .plateau{
   width:1550px;
   height: 600px;
+
+}
+.omnia{
+  height: 300px;
+  width: 300px;
+}
+.Zone{
+  margin-left: 30%;
+  margin-right: 30%;
+  background: black;
+  color: white;
+}
+.Reponse{
+  color: #cc0000;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
