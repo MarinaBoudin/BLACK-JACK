@@ -1,3 +1,19 @@
+goal=0;
+var get_scored = function(a){
+  if (a[0]===1){
+    if(a[1]>=2){
+      goal=goal+(4-(a[1]-1));
+    }
+  }
+  else if (a[0]===2){
+    if (a[1]===0){
+      goal=goal+2;
+    }
+  }
+  var go = document.getElementById("go");
+  go.textContent=goal;
+}
+
 //CAT QUIZZY//
 var answer = function(a){
   var img=document.getElementById("omnia");
@@ -7,17 +23,42 @@ var answer = function(a){
     img.src="Img/Question/bonne.JPG";
     next.style.display="inline-block";
     rep.style.display="block";
+    var what=[2,0];
+    get_scored(what);
+    next.addEventListener("click",function(){
+      var gameboard = document.getElementById("gameboard");
+      var quizz = document.getElementById("quizz");
+      gameboard.style.display="block";
+      quizz.style.display="none";
+    });
   }
   else if(this.value==="Non"){
     img.src="Img/Question/mauvaise.JPG";
     next.style.display="inline-block";
     rep.style.display="block";
+    what=[2,1];
+    get_scored(what);
+    next.addEventListener("click",function(){
+      var gameboard = document.getElementById("gameboard");
+      var quizz = document.getElementById("quizz");
+      gameboard.style.display="block";
+      quizz.style.display="none";
+    });
   }
   else if (this.value==="IDK"){
     img.src="Img/Question/idk.gif";
     rep.textContent="Je suis sûre que vous savez !!";
+    what=[2,1];
+    get_scored(what);
+    next.addEventListener("click",function(){
+      var gameboard = document.getElementById("gameboard");
+      var quizz = document.getElementById("quizz");
+      gameboard.style.display="block";
+      quizz.style.display="none";
+    });
   }
 }
+var what=0;
 var quizzy = function(a){
   var image=["Img/Question/omnia.jpg","Img/Question/hiss.gif","Img/Question/tortue.jpg","Img/Question/patte.gif","Img/Question/sneeze.gif","Img/Question/eye.JPG","Img/Question/paw.gif","Img/Question/mustache.gif","Img/Question/water.gif","Img/Question/chaton.JPG"]
   var Question=["Est-ce que ceci est beaucoup trop mignon ?","Quand un chat vous crache dessus, cela signifie ?","Le pelage écaille de tortue a une spécificité laquelle ?","Les chats peuvent-il être droitier ou gaucher ?","De quoi sommes-nous allergique lorsque nous faisons une allergie aux chats ?","Quelle est la couleur des yeux du chat à la naissance. ?","Combien de doigts ont les chats ?","Les moustaches du chat peuvent-elles repoussées ?","Les chats peuvent-ils boire de l'eau de mer ?","Une seule et même portée de chaton peut-elle avoir plusieurs pères ?"];
@@ -52,7 +93,6 @@ var quizzy = function(a){
   radio3.addEventListener('click',answer);
   var next = document.getElementById("Next");
   next.style.display='none';
-  next.addEventListener("click",function(){play(0)});
 }
 
 // BLACKCAT //
@@ -75,7 +115,6 @@ function Score(index,sc){
   if(sc<42){
     value=carte[index].search(/\d/);
     sc=sc+Number(carte[index][value]+carte[index][value+1]);
-    console.log(sc);
     return sc
   }
   else if(sc>42){
@@ -88,7 +127,6 @@ var startagain=function(){
   var longueur = divJ.childNodes.length;
   for (var k = 3; k<longueur;k++){
     divJ.removeChild(divJ.childNodes[3]);
-    console.log(divJ.childNodes)
   }
   var divC = document.getElementById("Croupier");
   var longueur = divC.childNodes.length;
@@ -115,6 +153,11 @@ var startagain=function(){
   score=Score(idxJ,score);
   var scoreJ=document.getElementById("score_joueur");
   scoreJ.textContent=score;
+  attempt=attempt+1;
+  if (attempt===4){
+    attempt=1;
+    play(1,attempt);
+  }
 }
 function addImgInDiv() {
   if(id.length!==52){
@@ -135,18 +178,11 @@ function addImgInDiv() {
         if(scoreD<score){
           window.alert("Congratulations");
           startagain();
-          var gameboard = document.getElementById("gameboard");
-          var cat = document.getElementById("blackcat");
-          gameboard.style.display="block";
-          cat.style.display="none";
+          play(1,[1,attempt]);
         }
         else if(score===scoreD){
           window.alert("Congratulations");
           startagain();
-          var gameboard = document.getElementById("gameboard");
-          var cat = document.getElementById("blackcat");
-          gameboard.style.display="block";
-          cat.style.display="none";
         }
         else{
           window.alert("Defaite");
@@ -156,18 +192,12 @@ function addImgInDiv() {
       else if(scoreD>42 && score<42){
         window.alert("Défaite du Croupier \n Vous avez gagné")
         startagain();
-        var gameboard = document.getElementById("gameboard");
-        var cat = document.getElementById("blackcat");
-        gameboard.style.display="block";
-        cat.style.display="none";
+        play(1,[1,attempt]);
       }
       else{
         window.alert("Défaite du Croupier")
         startagain();
-        var gameboard = document.getElementById("gameboard");
-        var cat = document.getElementById("blackcat");
-        gameboard.style.display="block";
-        cat.style.display="none";
+        play(1,[1,attempt]);
       }
     }
     else if(this.id==="Card"){
@@ -183,10 +213,7 @@ function addImgInDiv() {
       if(score===42){
         window.alert("Congratulations");
         startagain();
-        var gameboard = document.getElementById("gameboard");
-        var cat = document.getElementById("blackcat");
-        gameboard.style.display="block";
-        cat.style.display="none";
+        play(1,[1,attempt]);
       }
       else if(score>42){
         window.alert("Defaite");
@@ -197,6 +224,22 @@ function addImgInDiv() {
 }
 
 function blackcat(){
+  var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png","Img/C6.png","Img/C7.png","Img/C8.png","Img/C9.png","Img/C10.png","Img/C3.png","Img/C4.png"
+  ,"Img/C5.png","Img/DC10.png","Img/DK10.png","Img/DP10.png","Img/DT10.png","Img/K2.png","Img/K3.png","Img/K4.png","Img/K5.png","Img/K6.png","Img/K7.png","Img/K8.png",
+  "Img/K9.png","Img/K10.png","Img/P2.png","Img/P3.png","Img/P4.png","Img/P5.png","Img/P6.png","Img/P7.png","Img/P8.png","Img/P9.png","Img/P10.png","Img/RC10.png","Img/RK10.png",
+  "Img/RP10.png","Img/RT10.png","Img/T2.png","Img/T3.png","Img/T4.png","Img/T6.png","Img/T7.png","Img/T8.png","Img/T9.png","Img/T10.png","Img/VC10.png","Img/VK10.png","Img/VP10.png",
+  "Img/VT10.png","Img/T5.png"]
+  var id=[];
+  var min=0;
+  var max=carte.length-1;
+  var score=0;
+  var scoreD=0;
+  var value=0;
+  var nbCardD=1;
+  var nbCardJ=1;
+  var attempt=1;
+  var imgD=document.getElementById("dealer");
+  var imgJ=document.getElementById("your");
   idxD=random();
   imgD.src=carte[idxD];
   scoreD=Score(idxD,scoreD);
@@ -225,8 +268,7 @@ var scoreD=0;
 var value=0;
 var nbCardD=1;
 var nbCardJ=1;
-var imgD=document.getElementById("dealer");
-var imgJ=document.getElementById("your");
+var attempt=1;
 // MAIN //
 var player = function(plateau){
   for (var k = 0;k<=11;k++){
@@ -251,7 +293,7 @@ var movetop = function(plateau,base){
     plateau[pos[0]-1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
@@ -268,7 +310,7 @@ var movebottom = function(plateau,base){
     plateau[pos[0]+1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
@@ -285,7 +327,7 @@ var moveleft = function(plateau,base){
     plateau[pos[0]][pos[1]-1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
@@ -302,11 +344,11 @@ var moveright = function(plateau,base){
     plateau[pos[0]][pos[1]+1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
-var play = function(type){
+var play = function(type,points){
   if (type===4){
     var gameboard = document.getElementById("gameboard");
     var cat = document.getElementById("blackcat");
@@ -321,11 +363,13 @@ var play = function(type){
     quizz.style.display="block";
     quizzy(type[1])
   }
-  else if (type===0) {
+  else if (type===1){
     var gameboard = document.getElementById("gameboard");
-    var quizz = document.getElementById("quizz");
+    var cat = document.getElementById("blackcat");
     gameboard.style.display="block";
-    quizz.style.display="none";
+    cat.style.display="none";
+    get_scored(points);
+    attempt=1;
   }
 }
 var affichage = function(plateau){
@@ -393,8 +437,8 @@ var setupListener = function(plateau,base){
   quizz.style.display="none";
 }
 var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-[0,0,[3,6],0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,[3,1],0,0,0,0],
-[0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,0,[3,9],0,1,4,1,1,1,0,0,0,0],
+[0,0,[3,6],0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,[3,1],0,0,0,0],
+[0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,0,[3,9],0,1,1,1,1,1,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,4,1,1,1,0,0,0,1,0,0,0,0,4,0],
 [0,0,0,0,4,0,0,0,0,[3,4],0,0,0,4,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,0],
 [0,0,0,0,1,0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,[3,8],0,0,0,0],

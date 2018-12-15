@@ -1,3 +1,19 @@
+goal=0;
+var get_scored = function(){
+  if (a[0]===1){
+    if(a[1]>=2){
+      goal=goal+(4-(a[1]-1));
+    }
+  }
+  else if (a[0]===2){
+    if (a[1]===0){
+      goal=goal+2;
+    }
+  }
+  var go = document.getElementById("go");
+  go.textContent=goal;
+}
+
 //CAT QUIZZY//
 var answer = function(a){
   var img=document.getElementById("omnia");
@@ -7,15 +23,18 @@ var answer = function(a){
     img.src="Img/Question/bonne.JPG";
     next.style.display="inline-block";
     rep.style.display="block";
+    return [2,0];
   }
   else if(this.value==="Non"){
     img.src="Img/Question/mauvaise.JPG";
     next.style.display="inline-block";
     rep.style.display="block";
+    return [2,1];
   }
   else if (this.value==="IDK"){
     img.src="Img/Question/idk.gif";
     rep.textContent="Je suis sûre que vous savez !!";
+    return [2,1];
   }
 }
 var quizzy = function(a){
@@ -40,19 +59,19 @@ var quizzy = function(a){
   ask.textContent=Question[a];
   var reponse1=document.getElementById("rep1");
   reponse1.value=rep[a][1];
-  reponse1.addEventListener('click',answer);
+  what=reponse1.addEventListener('click',answer);
 	var trep1=document.getElementById("textrep1");
   trep1.textContent=rep[a][0];
 	var reponse2=document.getElementById("rep2");
   reponse2.value=rep[a][3];
-  reponse2.addEventListener('click',answer);
+  what=reponse2.addEventListener('click',answer);
 	var trep2=document.getElementById("textrep2");
   trep2.textContent=rep[a][2];
   var radio3 =document.getElementById("rep3");
-  radio3.addEventListener('click',answer);
+  what=radio3.addEventListener('click',answer);
   var next = document.getElementById("Next");
   next.style.display='none';
-  next.addEventListener("click",function(){play(0)});
+  next.addEventListener("click",function(){play(0,what)});
 }
 
 // BLACKCAT //
@@ -115,6 +134,13 @@ var startagain=function(){
   score=Score(idxJ,score);
   var scoreJ=document.getElementById("score_joueur");
   scoreJ.textContent=score;
+  if (attempt<3){
+    attempt=attempt+1;
+  }
+  else{
+    attempt=1;
+    play(1,attempt);
+  }
 }
 function addImgInDiv() {
   if(id.length!==52){
@@ -135,39 +161,26 @@ function addImgInDiv() {
         if(scoreD<score){
           window.alert("Congratulations");
           startagain();
-          var gameboard = document.getElementById("gameboard");
-          var cat = document.getElementById("blackcat");
-          gameboard.style.display="block";
-          cat.style.display="none";
+          play(1,attempt);
         }
         else if(score===scoreD){
           window.alert("Congratulations");
           startagain();
-          var gameboard = document.getElementById("gameboard");
-          var cat = document.getElementById("blackcat");
-          gameboard.style.display="block";
-          cat.style.display="none";
+          play(1,attempt-1);
         }
         else{
           window.alert("Defaite");
-          startagain();
         }
       }
       else if(scoreD>42 && score<42){
         window.alert("Défaite du Croupier \n Vous avez gagné")
         startagain();
-        var gameboard = document.getElementById("gameboard");
-        var cat = document.getElementById("blackcat");
-        gameboard.style.display="block";
-        cat.style.display="none";
+        play(1,attempt-1);
       }
       else{
         window.alert("Défaite du Croupier")
         startagain();
-        var gameboard = document.getElementById("gameboard");
-        var cat = document.getElementById("blackcat");
-        gameboard.style.display="block";
-        cat.style.display="none";
+        play(1,attempt-1);
       }
     }
     else if(this.id==="Card"){
@@ -183,10 +196,7 @@ function addImgInDiv() {
       if(score===42){
         window.alert("Congratulations");
         startagain();
-        var gameboard = document.getElementById("gameboard");
-        var cat = document.getElementById("blackcat");
-        gameboard.style.display="block";
-        cat.style.display="none";
+        play(1,attempt-1);
       }
       else if(score>42){
         window.alert("Defaite");
@@ -227,6 +237,7 @@ var nbCardD=1;
 var nbCardJ=1;
 var imgD=document.getElementById("dealer");
 var imgJ=document.getElementById("your");
+var attempt=1;
 // MAIN //
 var player = function(plateau){
   for (var k = 0;k<=11;k++){
@@ -251,7 +262,7 @@ var movetop = function(plateau,base){
     plateau[pos[0]-1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
@@ -268,7 +279,7 @@ var movebottom = function(plateau,base){
     plateau[pos[0]+1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
@@ -285,7 +296,7 @@ var moveleft = function(plateau,base){
     plateau[pos[0]][pos[1]-1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
@@ -302,11 +313,11 @@ var moveright = function(plateau,base){
     plateau[pos[0]][pos[1]+1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau);
-    play(condition);
+    play(condition,0);
   }
   affichage(plateau);
 }
-var play = function(type){
+var play = function(type,what){
   if (type===4){
     var gameboard = document.getElementById("gameboard");
     var cat = document.getElementById("blackcat");
@@ -326,6 +337,13 @@ var play = function(type){
     var quizz = document.getElementById("quizz");
     gameboard.style.display="block";
     quizz.style.display="none";
+    get_scored(what);
+  }
+  else if (type===1){
+    var gameboard = document.getElementById("gameboard");
+    var cat = document.getElementById("blackcat");
+    gameboard.style.display="block";
+    cat.style.display="none";
   }
 }
 var affichage = function(plateau){
