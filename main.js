@@ -15,10 +15,13 @@ var get_scored = function(a){
 }
 
 //CAT QUIZZY//
+var clic=0
 var answer = function(a){
+  clic=clic+1
   var img=document.getElementById("omnia");
   var rep=document.getElementById("rep");
   var next =document.getElementById("Next");
+  if(clic===1){  
   if(this.value==="Oui"){
     img.src="Img/Question/bonne.JPG";
     next.style.display="inline-block";
@@ -57,6 +60,11 @@ var answer = function(a){
       quizz.style.display="none";
     });
   }
+    }
+    else{
+	window.alert("Vous avez déjà cliqué, veuillez appuyer sur Next")
+    }
+	
 }
 var what=0;
 var quizzy = function(a){
@@ -116,7 +124,7 @@ function Score(index,sc){
       value=carte[index].search(/\d/);
       number=Number(carte[index][value]+carte[index][value+1]);
       if(number===1){
-	  if(sc+number>42){
+	  if(sc+number>=42){
 	      sc=sc+1;
 	      return sc
 	  }
@@ -353,6 +361,7 @@ var moveright = function(plateau,base){
   }
   affichage(plateau);
 }
+
 var play = function(type,points){
   if (type===4){
     var gameboard = document.getElementById("gameboard");
@@ -367,6 +376,7 @@ var play = function(type,points){
     gameboard.style.display="none";
     quizz.style.display="block";
     quizzy(type[1])
+    clic=0
   }
   else if (type===1){
     var gameboard = document.getElementById("gameboard");
@@ -375,6 +385,8 @@ var play = function(type,points){
     cat.style.display="none";
     get_scored(points);
     attempt=1;
+    score=0;
+    scoreD=0;
   }
 }
 var affichage = function(plateau){
