@@ -74,6 +74,8 @@ var quizzy = function(a){
   next.addEventListener("click",function(){play(0,what)});
 }
 
+
+
 // BLACKCAT //
 function random(){
   var idx=Math.floor(Math.random() * (max - min +1)) + min;
@@ -91,17 +93,32 @@ function createImg(path) {
 }
 
 function Score(index,sc){
-  if(sc<42){
-    value=carte[index].search(/\d/);
-    sc=sc+Number(carte[index][value]+carte[index][value+1]);
     console.log(sc);
-    return sc
+    if(sc<42){
+	value=carte[index].search(/\d/);
+	if(Number(carte[index][value]+carte[index][value+1])===1){
+	    if(sc+11>42){
+		sc=sc+1;
+		return sc
+	    }
+	    else{
+		sc=sc+11;
+		return sc
+	    }
+	}
+	else{
+	    value=carte[index].search(/\d/);
+	    sc=sc+Number(carte[index][value]+carte[index][value+1]);
+	    console.log(sc);
+	    return sc
+	}
   }
   else if(sc>42){
     window.alert("Défaite");
     startagain();
   }
 }
+
 var startagain=function(){
   var divJ = document.getElementById("Joueur");
   var longueur = divJ.childNodes.length;
@@ -142,6 +159,7 @@ var startagain=function(){
     play(1,attempt);
   }
 }
+
 function addImgInDiv() {
   if(id.length!==52){
     if(this.id==="Stay"){
@@ -220,8 +238,9 @@ function blackcat(){
   var stay=document.getElementById("Stay");
   stay.addEventListener("click",addImgInDiv);
   var start=document.getElementById("Start again");
-  start.addEventListener("click",startagain);
+  start.addEventListener("click",startagain);  
 }
+
 var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png","Img/C6.png","Img/C7.png","Img/C8.png","Img/C9.png","Img/C10.png","Img/C3.png","Img/C4.png"
 ,"Img/C5.png","Img/DC10.png","Img/DK10.png","Img/DP10.png","Img/DT10.png","Img/K2.png","Img/K3.png","Img/K4.png","Img/K5.png","Img/K6.png","Img/K7.png","Img/K8.png",
 "Img/K9.png","Img/K10.png","Img/P2.png","Img/P3.png","Img/P4.png","Img/P5.png","Img/P6.png","Img/P7.png","Img/P8.png","Img/P9.png","Img/P10.png","Img/RC10.png","Img/RK10.png",
@@ -230,14 +249,14 @@ var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png",
 var id=[];
 var min=0;
 var max=carte.length-1;
-var score=0;
-var scoreD=0;
 var value=0;
 var nbCardD=1;
 var nbCardJ=1;
 var imgD=document.getElementById("dealer");
 var imgJ=document.getElementById("your");
 var attempt=1;
+
+
 // MAIN //
 var player = function(plateau){
   for (var k = 0;k<=11;k++){
@@ -249,6 +268,9 @@ var player = function(plateau){
   }
   return [ligne,colonne];
 }
+
+
+//Mouvement//
 var movetop = function(plateau,base){
   var pos = player(plateau);
   var new_position = plateau[pos[0]-1][pos[1]];
@@ -317,6 +339,8 @@ var moveright = function(plateau,base){
   }
   affichage(plateau);
 }
+
+
 var play = function(type,what){
   if (type===4){
     var gameboard = document.getElementById("gameboard");

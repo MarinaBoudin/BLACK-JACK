@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Black-Cat</title>
+  <link rel="stylesheet" href="testmarina.css">
+</head>
+<body style="background-color: black">
+  <div class="deco" id="blackcat">
+    <h1 class="title"> Marathon Cat</h1>
+    <div class="table">
+      <div class="info">
+        <h2>Dealer's cards :</h2>
+        <div id="Croupier">
+          <img class="card" src="" id="dealer">
+        </div>
+        <h2>Your cards : </h2>
+        <div id="Joueur">
+          <img class="card" src="" id="your">
+        </div>
+      </div>
+    </div>
+    <div class="bouttons">
+      <p class="fin"> The dealer has <span id="score_croupier">0</span> points</p>
+      <p class="fin"> You have <span id="score_joueur">0</span> points. Card or stay ?</p>
+      <button type="submit" id="Card">Card</button>
+      <button type="submit" id="Stay">Stay</button>
+      <button type="submit" id="Start again">Start again</button>
+    </div>
+  </div>
+  <div class="deco" id="quizz">
+    <h1 class="title">Cat Quizzy</h1>
+    <div class="Zone">
+      <div id="Image">
+        <img class="omnia" id="omnia" src=""></img>
+      </div>
+      <div>
+        <p id="Question"></p>
+      </div>
+      <form action="">
+        <input type="radio" id="rep1" name="answer" value="Oui"><span id="textrep1"></span><br>
+        <input type="radio" id="rep2" name="answer" value="Non"><span id="textrep2"></span><br>
+        <input type="radio" id="rep3" name="answer" value="IDK">Je ne sais pas
+      </form>
+      <div class="Reponse">
+        <p id="rep"></p>
+      </div>
+    </div>
+    <div class="Button">
+      <button type="submit" id="Next" value="Next">Next</button>
+    </div>
+  </div>
+  <div id="gameboard" class="deco2">
+    <h1 class="treetitle"> Omnia's cat tree </h1>
+    <button type="submit" id="Top">Top</button>
+    <button type="submit" id="Bottom">Bottom</button>
+    <button type="submit" id="Left">Left</button>
+    <button type="submit" id="Right">Right</button>
+    <div id="plateau" class="plateau">
+      <script src="main.js"></script>
+    </div>
+  </div>
+</body>
