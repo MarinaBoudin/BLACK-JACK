@@ -10,6 +10,17 @@ var get_scored = function(a){
       goal=goal+2;
     }
   }
+  else if (a[0]===3){
+    if (a[1]<=50){
+      goal=goal+3;
+    }
+    else if(a[1]<=100){
+      goal=goal+2;
+    }
+    else if(a[1]>100){
+      goal=goal+1;
+    }
+  }
   var go = document.getElementById("go");
   go.textContent=goal;
 }
@@ -154,8 +165,12 @@ var startagain=function(){
   var scoreJ=document.getElementById("score_joueur");
   scoreJ.textContent=score;
   attempt=attempt+1;
+  var life = document.getElementById("life");
+  life.textContent=3-attempt;
   if (attempt===4){
     attempt=1;
+    var life = document.getElementById("life");
+    life.textContent=3-attempt;
     play(1,attempt);
   }
 }
@@ -183,6 +198,7 @@ function addImgInDiv() {
         else if(score===scoreD){
           window.alert("Congratulations");
           startagain();
+          play(1,[1,attempt]);
         }
         else{
           window.alert("Defaite");
@@ -240,6 +256,8 @@ function blackcat(){
   var attempt=1;
   var imgD=document.getElementById("dealer");
   var imgJ=document.getElementById("your");
+  var life = document.getElementById("life");
+  life.textContent=3-attempt;
   idxD=random();
   imgD.src=carte[idxD];
   scoreD=Score(idxD,scoreD);
@@ -269,6 +287,142 @@ var value=0;
 var nbCardD=1;
 var nbCardJ=1;
 var attempt=1;
+
+//Meowmory//
+function random_memory(x){
+  var idx=Math.floor(Math.random() * (x));
+  return idx;
+}
+function createImg_memory(path) {
+  var img = document.createElement('img');
+  img.src = "Img/memory/cat.png";
+  img.style.width="15%";
+  img.onclick=function(){
+    memory(path);
+    verif();
+  };
+  return img;
+}
+var retourner=function(){
+  var txt = document.getElementById("res");
+  if(list[0].src.slice(59,62)!=list[1].src.slice(59,62)){
+    console.log(list[0].src.slice(59,62),list[1].src.slice(59,62))
+    for (var i of list){
+      i.id=i.src.slice(48,);
+      i.src="Img/memory/cat.png";
+    }
+    txt.textContent="Wrong";
+  }
+  else{
+    list[0].id="good";
+    list[1].id="good";
+    txt.textContent="Good";
+  }
+  list=[];
+}
+var restart=function(){
+  get_scored([3,coups]);
+  coups=0;
+  var div= document.getElementById("cat");
+  var longueur = div.childNodes.length;
+  for (var k = 0; k<longueur;k++){
+    div.removeChild(div.childNodes[0]);
+  }
+  chats=["Img/memory/bal1.png","Img/memory/ben1.png","Img/memory/bir1.png","Img/memory/cha1.png","Img/memory/cor1.png","Img/memory/mai1.png","Img/memory/mun1.png",
+    "Img/memory/per1.png","Img/memory/sco1.png","Img/memory/sia1.png","Img/memory/sph1.png","Img/memory/ton1.png","Img/memory/bal2.png","Img/memory/ben2.png",
+    "Img/memory/bir2.png","Img/memory/cha2.png","Img/memory/cor2.png","Img/memory/mai2.png","Img/memory/mun2.png","Img/memory/per2.png","Img/memory/sco2.png",
+    "Img/memory/sia2.png","Img/memory/sph2.png","Img/memory/ton2.png"];
+  let order=set(chats);
+  var div = document.getElementById("cat");
+  let di = 1;
+  for (var k of order){
+    var newi = createImg_memory(k);
+    newi.id=`${k}`;
+    newi.className="card";
+    div.appendChild(newi);
+    di++;
+  }
+  var un = document.getElementById("un");
+  un.src="Img/memory/cat.png";
+  un.style.width="50%";
+  var deux = document.getElementById("deux");
+  deux.src="Img/memory/cat.png";
+  deux.style.width="50%";
+  var txt = document.getElementById("res");
+  txt.textContent="?";
+  var gameboard = document.getElementById("gameboard");
+  var meowmory = document.getElementById("Meowmory");
+  gameboard.style.display="block";
+  meowmory.style.display="none";
+}
+var verif=function(){
+  var cards=document.getElementsByClassName("card");
+  card=0;
+  good=0;
+  for (var k of cards){
+    if(k.id=="retourner"){
+      card++;
+    }
+  }
+  if (card==1){
+    var un = document.getElementById("un");
+    un.src=list[0].src;
+    un.style.width="50%";
+    var deux =document.getElementById("deux");
+    deux.src="Img/memory/cat.png";
+    deux.style.width="50%";
+    var txt = document.getElementById("res");
+    txt.textContent="?";
+  }
+  if(card===2){
+    var deux = document.getElementById("deux");
+    deux.src=list[1].src;
+    deux.style.width="50%";
+    retourner();
+  }
+  for (var k of cards){
+    if (k.id=="good"){
+      good++;
+    }
+  }
+  if (good===24){
+    restart();
+  }
+}
+var set = function(img){
+  L=[];
+  let b=img.length;
+  let c=img.length;
+  for (let k = 0; k<c; k++){
+    a=random_memory(b);
+    L.push(img.splice(a,1));
+    b--;
+  }
+  return L;
+}
+var memory = function(id){
+  coups++;
+  var img = document.getElementById(`${id}`);
+  img.src=id;
+  img.id="retourner";
+  list.push(img);
+}
+var memories = function(){
+  let order=set(chats);
+  var div = document.getElementById("cat");
+  for (var k of order){
+    var newi = createImg_memory(k);
+    newi.id=`${k}`;
+    newi.className="card";
+    div.appendChild(newi);
+  }
+}
+coups=0
+list=[];
+chats=["Img/memory/bal1.png","Img/memory/ben1.png","Img/memory/bir1.png","Img/memory/cha1.png","Img/memory/cor1.png","Img/memory/mai1.png","Img/memory/mun1.png",
+  "Img/memory/per1.png","Img/memory/sco1.png","Img/memory/sia1.png","Img/memory/sph1.png","Img/memory/ton1.png","Img/memory/bal2.png","Img/memory/ben2.png",
+  "Img/memory/bir2.png","Img/memory/cha2.png","Img/memory/cor2.png","Img/memory/mai2.png","Img/memory/mun2.png","Img/memory/per2.png","Img/memory/sco2.png",
+  "Img/memory/sia2.png","Img/memory/sph2.png","Img/memory/ton2.png"];
 // MAIN //
 var player = function(plateau){
   for (var k = 0;k<=11;k++){
@@ -351,9 +505,9 @@ var moveright = function(plateau,base){
 var play = function(type,points){
   if (type===4){
     var gameboard = document.getElementById("gameboard");
-    var cat = document.getElementById("blackcat");
+    var blacat = document.getElementById("blackcat");
     gameboard.style.display="none";
-    cat.style.display="block";
+    blacat.style.display="block";
     blackcat();
   }
   else if (type[0]===3) {
@@ -365,11 +519,18 @@ var play = function(type,points){
   }
   else if (type===1){
     var gameboard = document.getElementById("gameboard");
-    var cat = document.getElementById("blackcat");
+    var blacat = document.getElementById("blackcat");
     gameboard.style.display="block";
-    cat.style.display="none";
+    blacat.style.display="none";
     get_scored(points);
     attempt=1;
+  }
+  else if (type===5){
+    var gameboard = document.getElementById("gameboard");
+    var meowmory = document.getElementById("Meowmory");
+    gameboard.style.display="none";
+    meowmory.style.display="block";
+    memories();
   }
 }
 var affichage = function(plateau){
@@ -400,8 +561,11 @@ var affichage = function(plateau){
         else if (column===7){
           canvas_grid.style.backgroundColor="yellow";
         }
-        else if (column==4){
+        else if (column===4){
           canvas_grid.style.backgroundColor="#cc0000";
+        }
+        else if (column===5){
+          canvas_grid.style.backgroundColor="#39ac73";
         }
         else if ((typeof column)=="object"){
           if (column[0]===3) {
@@ -433,31 +597,33 @@ var setupListener = function(plateau,base){
   left.addEventListener("click",function(){moveleft(plateau,base)});
   var jack = document.getElementById("quizz");
   var quizz = document.getElementById("blackcat");
+  var Meowmory=document.getElementById("Meowmory");
   jack.style.display="none";
   quizz.style.display="none";
+  Meowmory.style.display="none";
 }
 var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-[0,0,[3,6],0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,[3,1],0,0,0,0],
-[0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,0,[3,9],0,1,1,1,1,1,0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,4,1,1,1,0,0,0,1,0,0,0,0,4,0],
-[0,0,0,0,4,0,0,0,0,[3,4],0,0,0,4,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,0],
-[0,0,0,0,1,0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,[3,8],0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,4,0,0,0,0,0,1,1,[3,7],1,1,1,1,4,1,1,0,0,0,0],
-[0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,1,1,1,[3,2],1,1,1,1,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,[3,0],1,1,1,4,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
+[0,0,[3,6],0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,[3,1],0,0,0,0],
+[0,0,1,1,5,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,5,0,0,1,1,4,1,1,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,4,1,1,0,0,0,0,1,0,0,0,0,4,0],
+[0,0,0,0,4,0,0,0,0,[3,4],0,0,0,[3,9],0,0,0,1,0,0,0,0,0,0,5,1,1,[3,8],1,1,0],
+[0,0,0,0,1,0,0,0,0,1,1,4,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
+[0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,1,1,4,1,1,5,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,5,1,1,[3,2],1,1,4,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,[3,0],1,1,1,4,1,1,4,1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-[0,0,7,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,7,0,0,0,0],
-[0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,7,0,0,0,0,7,0,1,7,1,1,1,0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,7,1,1,1,0,0,0,1,0,0,0,0,7,0],
-[0,0,0,0,7,0,0,0,0,7,0,0,0,7,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1,0],
-[0,0,0,0,1,0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,7,0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,7,0,0,0,0,0,1,1,7,1,1,1,1,7,1,1,0,0,0,0],
-[0,0,0,0,7,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,1,1,1,7,1,1,1,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,7,1,1,1,7,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
+[0,0,7,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,0,0],
+[0,0,1,1,7,1,1,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,1,1,7,1,1,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,7,1,1,0,0,0,0,1,0,0,0,0,7,0],
+[0,0,0,0,7,0,0,0,0,7,0,0,0,7,0,0,0,1,0,0,0,0,0,0,7,1,1,7,1,1,0],
+[0,0,0,0,1,0,0,0,0,1,1,7,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
+[0,0,0,0,7,0,0,0,0,0,0,1,0,0,0,0,0,7,1,7,1,1,1,7,1,1,7,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,7,1,1,7,1,1,7,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,7,1,1,1,7,1,1,7,1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 window.addEventListener("load",function(){setupListener(plateau,base)});

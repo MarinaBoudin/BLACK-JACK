@@ -20,6 +20,7 @@
       </div>
     </div>
     <div class="bouttons">
+      <p class="regle" style="padding-top:1%">Gagne contre le croupier au black-jack avec 3 tentatives! Si tu gagnes du premier coup alors tu gagneras 3 points, du deuxième, 2 points, du troisième, 1 point sinon 0 ! Bonne chance !<br></br>Il te reste <span id="life">2</span> tentatives</p>
       <p class="fin"> The dealer has <span id="score_croupier">0</span> points</p>
       <p class="fin"> You have <span id="score_joueur">0</span> points. Card or stay ?</p>
       <button type="submit" id="Card">Card</button>
@@ -51,7 +52,7 @@
   </div>
   <div id="gameboard" class="deco2">
     <h1 class="treetitle"> Omnia's cat tree </h1>
-    <p class="regle"> Bienvenue dans Omnia's cat tree, voici l'arbre à chat des défis, il mèle questions sur les chats et parties de black-cat ! Réussi les défis avec le moins de coups possibles et gagne des points ! <br></br>Le score maximal possible est 50 ! Good luck !</p>
+    <p class="regle"> Bienvenue dans Omnia's cat tree, voici l'arbre à chat des défis, il mèle <span style="color:#7300e6">questions sur les chats </span>, parties de <span style="color:#39ac73">meowmory</span> et de <span style="color:#cc0000">black-cat</span> ! Réussi les défis avec le moins de coups possibles et gagne des points ! <br></br>Le score maximal possible est 77 ! Good luck !</p>
     <button type="submit" id="Top">Top</button>
     <button type="submit" id="Bottom">Bottom</button>
     <button type="submit" id="Left">Left</button>
@@ -60,5 +61,20 @@
       <script src="main.js"></script>
     </div>
     <p class="regle"> Ton score : <span id="go">0</span></p>
+  </div>
+  <div id="Meowmory" class="deco2">
+    <h1 class="treetitle"> Le meowmory ! </h1>
+    <p class="regle">Trouve toutes les paires ! Si tu les trouve en moins de 50 coups alors tu gagneras 3 points, en moins de 100 coups, 2 points et 1 si plus ! Bonne chance !</p>
+    <div class="deco3">
+      <div id="cat" style="text-align: center;width:50%;margin-left:auto;margin-right:auto;float:left">
+      </div >
+      <div id="add" style="display:inline;float:right;text-align:center;margin-right:35%;width:15%;margin-top:2%">
+        <img id="un" src="Img/memory/cat.png" style="width:50%">
+        <p style="color:white">+</p>
+        <img id="deux" src="Img/memory/cat.png" style="width:50%">
+        <p style="color:white">=</p>
+        <p id="res" style="color:white">?</p>
+      </div>
+    </div>
   </div>
 </body>
