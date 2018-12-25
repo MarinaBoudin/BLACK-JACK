@@ -26,10 +26,13 @@ var get_scored = function(a){
 }
 
 //CAT QUIZZY//
+var clic=0
 var answer = function(a){
+  clic=clic+1
   var img=document.getElementById("omnia");
   var rep=document.getElementById("rep");
   var next =document.getElementById("Next");
+  if(clic===1){
   if(this.value==="Oui"){
     img.src="Img/Question/bonne.JPG";
     next.style.display="inline-block";
@@ -68,6 +71,11 @@ var answer = function(a){
       quizz.style.display="none";
     });
   }
+    }
+    else{
+	window.alert("Vous avez déjà cliqué, veuillez appuyer sur Next")
+    }
+
 }
 var what=0;
 var quizzy = function(a){
@@ -124,15 +132,30 @@ function createImg(path) {
 
 function Score(index,sc){
   if(sc<42){
-    value=carte[index].search(/\d/);
+      value=carte[index].search(/\d/);
+      number=Number(carte[index][value]+carte[index][value+1]);
+      if(number===1){
+	  if(sc+number>=42){
+	      sc=sc+1;
+	      return sc
+	  }
+	  else{
+	      sc=sc+11;
+	      return sc
+	  }
+      }
+      else{
     sc=sc+Number(carte[index][value]+carte[index][value+1]);
-    return sc
+	  return sc
+      }
   }
   else if(sc>42){
     window.alert("Défaite");
     startagain();
   }
 }
+
+
 var startagain=function(){
   var divJ = document.getElementById("Joueur");
   var longueur = divJ.childNodes.length;
@@ -240,20 +263,6 @@ function addImgInDiv() {
 }
 
 function blackcat(){
-  var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png","Img/C6.png","Img/C7.png","Img/C8.png","Img/C9.png","Img/C10.png","Img/C3.png","Img/C4.png"
-  ,"Img/C5.png","Img/DC10.png","Img/DK10.png","Img/DP10.png","Img/DT10.png","Img/K2.png","Img/K3.png","Img/K4.png","Img/K5.png","Img/K6.png","Img/K7.png","Img/K8.png",
-  "Img/K9.png","Img/K10.png","Img/P2.png","Img/P3.png","Img/P4.png","Img/P5.png","Img/P6.png","Img/P7.png","Img/P8.png","Img/P9.png","Img/P10.png","Img/RC10.png","Img/RK10.png",
-  "Img/RP10.png","Img/RT10.png","Img/T2.png","Img/T3.png","Img/T4.png","Img/T6.png","Img/T7.png","Img/T8.png","Img/T9.png","Img/T10.png","Img/VC10.png","Img/VK10.png","Img/VP10.png",
-  "Img/VT10.png","Img/T5.png"]
-  var id=[];
-  var min=0;
-  var max=carte.length-1;
-  var score=0;
-  var scoreD=0;
-  var value=0;
-  var nbCardD=1;
-  var nbCardJ=1;
-  var attempt=1;
   var imgD=document.getElementById("dealer");
   var imgJ=document.getElementById("your");
   var life = document.getElementById("life");
@@ -273,6 +282,7 @@ function blackcat(){
   var start=document.getElementById("Start again");
   start.addEventListener("click",startagain);
 }
+
 var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png","Img/C6.png","Img/C7.png","Img/C8.png","Img/C9.png","Img/C10.png","Img/C3.png","Img/C4.png"
 ,"Img/C5.png","Img/DC10.png","Img/DK10.png","Img/DP10.png","Img/DT10.png","Img/K2.png","Img/K3.png","Img/K4.png","Img/K5.png","Img/K6.png","Img/K7.png","Img/K8.png",
 "Img/K9.png","Img/K10.png","Img/P2.png","Img/P3.png","Img/P4.png","Img/P5.png","Img/P6.png","Img/P7.png","Img/P8.png","Img/P9.png","Img/P10.png","Img/RC10.png","Img/RK10.png",
@@ -502,6 +512,7 @@ var moveright = function(plateau,base){
   }
   affichage(plateau);
 }
+
 var play = function(type,points){
   if (type===4){
     var gameboard = document.getElementById("gameboard");
@@ -516,6 +527,7 @@ var play = function(type,points){
     gameboard.style.display="none";
     quizz.style.display="block";
     quizzy(type[1])
+    clic=0
   }
   else if (type===1){
     var gameboard = document.getElementById("gameboard");
@@ -524,6 +536,8 @@ var play = function(type,points){
     blacat.style.display="none";
     get_scored(points);
     attempt=1;
+    score=0;
+    scoreD=0;
   }
   else if (type===5){
     var gameboard = document.getElementById("gameboard");
