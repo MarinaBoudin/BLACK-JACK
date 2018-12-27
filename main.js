@@ -233,6 +233,10 @@ function addImgInDiv() {
         startagain();
         play(1,[1,attempt]);
       }
+      else if(scoreD===42 && score<42){
+        window.alert("Victoire du croupier \n Défaite")
+	startagain();
+      }
       else{
         window.alert("Défaite du Croupier")
         startagain();
@@ -432,7 +436,9 @@ list=[];
 chats=["Img/memory/bal1.png","Img/memory/ben1.png","Img/memory/bir1.png","Img/memory/cha1.png","Img/memory/cor1.png","Img/memory/mai1.png","Img/memory/mun1.png",
   "Img/memory/per1.png","Img/memory/sco1.png","Img/memory/sia1.png","Img/memory/sph1.png","Img/memory/ton1.png","Img/memory/bal2.png","Img/memory/ben2.png",
   "Img/memory/bir2.png","Img/memory/cha2.png","Img/memory/cor2.png","Img/memory/mai2.png","Img/memory/mun2.png","Img/memory/per2.png","Img/memory/sco2.png",
-  "Img/memory/sia2.png","Img/memory/sph2.png","Img/memory/ton2.png"];
+       "Img/memory/sia2.png","Img/memory/sph2.png","Img/memory/ton2.png"];
+
+
 // MAIN //
 var player = function(plateau){
   for (var k = 0;k<=11;k++){
