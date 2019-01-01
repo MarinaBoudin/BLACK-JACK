@@ -322,7 +322,7 @@ var retourner=function(){
   if(list[0].src.slice(53,56)!=list[1].src.slice(53,56)){
     console.log(list[0].src.slice(53,56),list[1].src.slice(53,56))
     for (var i of list){
-      i.id=i.src.slice(48,);
+      i.id=i.src;
       i.src="Img/memory/cat.png";
     }
     txt.textContent="Wrong";
@@ -342,10 +342,14 @@ var restart=function(){
   for (var k = 0; k<longueur;k++){
     div.removeChild(div.childNodes[0]);
   }
-  chats=["Img/memory/bal1.png","Img/memory/ben1.png","Img/memory/bir1.png","Img/memory/cha1.png","Img/memory/cor1.png","Img/memory/mai1.png","Img/memory/mun1.png",
-    "Img/memory/per1.png","Img/memory/sco1.png","Img/memory/sia1.png","Img/memory/sph1.png","Img/memory/ton1.png","Img/memory/bal2.png","Img/memory/ben2.png",
-    "Img/memory/bir2.png","Img/memory/cha2.png","Img/memory/cor2.png","Img/memory/mai2.png","Img/memory/mun2.png","Img/memory/per2.png","Img/memory/sco2.png",
-    "Img/memory/sia2.png","Img/memory/sph2.png","Img/memory/ton2.png"];
+  chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
+    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
   let order=set(chats);
   var div = document.getElementById("cat");
   let di = 1;
@@ -433,11 +437,14 @@ var memories = function(){
 }
 coups=0
 list=[];
-chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
-       "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
-
+chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
 
 // MAIN //
 var player = function(plateau){
