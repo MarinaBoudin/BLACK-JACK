@@ -420,6 +420,8 @@ var set = function(img){
 }
 var memory = function(id){
   coups++;
+  var coup =document.getElementById("coups");
+  coup.textContent=coups;
   var img = document.getElementById(`${id}`);
   img.src=id;
   img.id="retourner";
