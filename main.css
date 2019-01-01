@@ -36,7 +36,6 @@
 }
 img{
     width:125px;
-    margin-left: 2.5%;
 }
 button{
      background-color: #cc0000;
@@ -93,4 +92,7 @@ button{
 .regle{
   color: white;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+.card{
+  margin-left: 1%;
 }

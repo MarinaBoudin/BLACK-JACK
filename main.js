@@ -320,7 +320,6 @@ function createImg_memory(path) {
 var retourner=function(){
   var txt = document.getElementById("res");
   if(list[0].src.slice(59,62)!=list[1].src.slice(59,62)){
-    console.log(list[0].src.slice(59,62),list[1].src.slice(59,62))
     for (var i of list){
       i.id=i.src.slice(48,);
       i.src="Img/memory/cat.png";
