@@ -319,8 +319,8 @@ function createImg_memory(path) {
 }
 var retourner=function(){
   var txt = document.getElementById("res");
-  if(list[0].src.slice(59,62)!=list[1].src.slice(59,62)){
-    console.log(list[0].src.slice(59,62),list[1].src.slice(59,62))
+  if(list[0].src.slice(53,56)!=list[1].src.slice(53,56)){
+    console.log(list[0].src.slice(53,56),list[1].src.slice(53,56))
     for (var i of list){
       i.id=i.src.slice(48,);
       i.src="Img/memory/cat.png";
@@ -433,10 +433,10 @@ var memories = function(){
 }
 coups=0
 list=[];
-chats=["Img/memory/bal1.png","Img/memory/ben1.png","Img/memory/bir1.png","Img/memory/cha1.png","Img/memory/cor1.png","Img/memory/mai1.png","Img/memory/mun1.png",
-  "Img/memory/per1.png","Img/memory/sco1.png","Img/memory/sia1.png","Img/memory/sph1.png","Img/memory/ton1.png","Img/memory/bal2.png","Img/memory/ben2.png",
-  "Img/memory/bir2.png","Img/memory/cha2.png","Img/memory/cor2.png","Img/memory/mai2.png","Img/memory/mun2.png","Img/memory/per2.png","Img/memory/sco2.png",
-       "Img/memory/sia2.png","Img/memory/sph2.png","Img/memory/ton2.png"];
+chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
+       "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
 
 
 // MAIN //
