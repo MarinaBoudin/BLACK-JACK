@@ -1,0 +1,28 @@
+.schema{
+    width:200px;
+    float: right;
+}
+
+.table{
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height :530px;
+  text-align:center;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 2.5%;
+}
+.ComputerCard{
+    border:10px outset #cc0000;
+}
+.YourCard{
+    border:10px outset #cc0000;b
+			       
+}
+
+img{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 150px;
+}

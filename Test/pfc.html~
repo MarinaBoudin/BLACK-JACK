@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>CAT MOUSE HUMAN</title>
+    <link rel="stylesheet" href="pfc.css">
+    <script src="pfc.js"></script>
+  </head>
+  <body>
+    <div class="table">
+      <div class="ComputerCard">
+	<img src="../Img/PFC/arriere.png">
+	<img src="../Img/PFC/arriere.png">
+	<img src="../Img/PFC/arriere.png">
+      </div>
+      <div class="YourCard">
+	<img src="../Img/PFC/human.png">
+	<img src="../Img/PFC/chat.png">
+	<img src="../Img/PFC/mulot.png">
+      </div>
+    </div>
+    <div class="Res">
+      Il s'agit d'une adaptation du pierre feuille ciseaux. Pour gagner il faut gagné 2 points face à son adversaire. Vous avez trois tentatives afin de remporter des points. Gagné du premier coup : 3 points, du second : 2 points, du troisième : 1 point. Sinon c'est perdu ! Bonne chance.
+      <p>Vous avez<span> 0 </span>points !</p>
+      <p>L'ordinateur a <span> 0 </span>points !</p>
+    </div>
+    <div class="figure">
+	<img class="schema" src="../Img/PFC/schema.png" alt="">
+    </div>
+  </body>
+</html>
