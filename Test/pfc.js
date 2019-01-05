@@ -7,7 +7,9 @@ function random_pfc(m){
 
 function createImg(path) {
   var img = document.createElement('img');
-  img.src = path;
+    img.src = path;
+    img.className="Carte";
+    img.addEventListener("click",action)
   return img;
 }
 
@@ -30,7 +32,7 @@ function done(y,img){
 }
 
 function action(){
-    if(score<2&&pc<2){
+    if(score<2 && pc<2){
 	comp=random_pfc(max);
 	if(this.id==="human"){
 	    var test="human";
@@ -42,11 +44,10 @@ function action(){
 		pc=pc+1;
 		done(this,comp);
 	    }
-	    else{
-		choix.push("../Img/PFC/human.png");
-		max=max+1;
+	    else if(comp==="../Img/PFC/human.png"){
+		window.alert("Même carte, remise en jeu");
+		comp=random_pfc(max);
 	    }
-	
 	}
 	else if(this.id==="chat"){
 	    var test="chat"
@@ -58,9 +59,9 @@ function action(){
 		score=score+1;
 		done(this,comp);
 	    }
-	    else{
-		choix.push("../Img/PFC/chat.png");
-		max=max+1;
+	    else if(comp==="../Img/PFC/chat.png"){
+		window.alert("Même carte, remise en jeu");
+		comp=random_pfc(max);
 	    }
 	}
 	else if(this.id==="mulot"){
@@ -73,22 +74,65 @@ function action(){
 		pc=pc+1;
 		done(this,comp);
 	    }
-	    else{
-		choix.push("../Img/PFC/mulot.png");
-		max=max+1;
+	    else if(comp==="../Img/PFC/mulot.png"){
+		window.alert("Même carte, remise en jeu");
+		comp=random_pfc(max);
 	    }
 	}
-	
+	if(pc===1 && score===1){
+	    window.alert("Egalité")
+	    restart();
+	}
     }
     else if(score===2){
 	window.alert("Gagné")
     }
     else if(pc===2){
 	window.alert("Défaite")
+	restart();
     }
-    else if(pc===1 && score===1){
-	window.alert("Egalité")
+}
+
+function restart(){
+    var img=document.getElementById("1");
+    img.parentNode.removeChild(img);
+    var img1=document.getElementsByClassName("Carte");
+    img1[0].parentNode.removeChild(img1[0]);
+    var divC=document.getElementById("Cc");
+    var path="../Img/PFC/arriere.png";
+    for(var k=0;k<3;k++){
+	var newImg=createImg(path);
+	var id=k+1
+	newImg.id=id.toString();
+	divC.appendChild(newImg);
     }
+    var divJ=document.getElementById("Yc");
+    var path1="../Img/PFC/chat.png";
+    var path2="../Img/PFC/mulot.png";
+    var path3="../Img/PFC/human.png";
+    var nI1=createImg(path1);
+    nI1.id="chat";
+    divJ.appendChild(nI1);
+    var nI2=createImg(path2);
+    nI2.id="mulot";
+    divJ.appendChild(nI2);
+    var nI3=createImg(path3);
+    nI3.id="human";
+    divJ.appendChild(nI3);
+    var divR=document.getElementById("res");
+    var longueur=divR.childNodes.length;
+    for(var k=3;k<longueur;k++){
+	divR.removeChild(divR.childNodes[3]);
+    }
+    choix=["../Img/PFC/human.png","../Img/PFC/chat.png","../Img/PFC/mulot.png"]
+    max=choix.length;
+    x=3;
+    score=0;
+    pc=0;
+    var sc=document.getElementById("score_joueur");
+    sc.textContent=score;
+    var sc2=document.getElementById("score_pc");
+    sc2.textContent=pc;
 }
 
 function setUp(){

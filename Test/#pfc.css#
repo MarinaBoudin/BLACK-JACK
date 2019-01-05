@@ -1,13 +1,14 @@
-.schema{
-    width:200px;
-    float: right;
+body{
+  background-image:url("../Img/bacat.jpg");
+  color:black;
+  font-family: "Comic Sans MS",sans-serif;
 }
 
-.table{
+.zone{
   background-color: black;
   background-size: cover;
   background-repeat: no-repeat;
-  height :530px;
+  height :870px;
   text-align:center;
   margin-left: 10%;
   margin-right: 10%;
@@ -17,12 +18,31 @@
     border:10px outset #cc0000;
 }
 .YourCard{
-    border:10px outset #cc0000;b
-			       
+    border:10px outset #cc0000;
+}
+.res{
+    border:10px outset #cc0000;
+    text-align: center;
+    color: white;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 img{
     margin-top: 1%;
     margin-bottom: 1%;
     width: 150px;
+}
+
+.figure {
+  float: right;
+  width: 30%;
+  text-align: center;
+  border: thin #cc0000 solid;
+}
+
+.Res{
+    background-color: black;
+    text-align: center;
+    color: white;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
