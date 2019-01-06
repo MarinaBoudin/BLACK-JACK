@@ -747,7 +747,7 @@ var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre √
           canvas_grid.style.backgroundColor="#39ac73";
         }
         else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera
-          canvas_grid.style.backgroundColor="green";
+          canvas_grid.style.backgroundColor="#D2B48C";
         }
         else if ((typeof column)=="object"){ // SI c'est un object alors c'est le questionnaire
           if (column[0]===3) { // La couleur de la case sera donc violette
@@ -789,7 +789,7 @@ var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,6,1,4,1,1,5,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,5,1,1,[3,2],1,1,4,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,5,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,6,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]; // C'est le plateau de jeu avec tous les jeux qui sont plac√©s
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
