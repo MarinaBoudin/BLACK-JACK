@@ -26,8 +26,8 @@ var get_scored = function(jeu){ // Fonction qui va compter les points du joueur 
 }
 
 //CAT QUIZZY//
-var clic=0
-var answer = function(a){
+var clic=0; //Compteur du nombre de clic afin que le joueur ne puisse repondre qu'une seule fois
+var answer = function(a){//Fonction qui verifie si la reponse est bonne ou non 
   clic=clic+1
   var img=document.getElementById("omnia");
   var rep=document.getElementById("rep");
@@ -84,7 +84,7 @@ var answer = function(a){
 
 }
 var what=0;
-var quizzy = function(a){
+var quizzy = function(a){//Fonction qui attribue les questions et reponses a chaque nouvelle question
   var image=["Img/Question/omnia.jpg","Img/Question/hiss.gif","Img/Question/tortue.jpg","Img/Question/patte.gif","Img/Question/sneeze.gif","Img/Question/eye.JPG","Img/Question/paw.gif","Img/Question/mustache.gif","Img/Question/water.gif","Img/Question/chaton.JPG"]
   var Question=["Est-ce que ceci est beaucoup trop mignon ?","Quand un chat vous crache dessus, cela signifie ?","Le pelage écaille de tortue a une spécificité laquelle ?","Les chats peuvent-ils être droitier ou gaucher ?","De quoi sommes-nous allergiques lorsque nous faisons une allergie aux chats ?","Quelle est la couleur des yeux du chat à la naissance. ?","Combien de doigts ont les chats ?","Les moustaches du chat peuvent-elles repousser ?","Les chats peuvent-ils boire de l'eau de mer ?","Une seule et même portée de chaton peut-elle avoir plusieurs pères ?"];
   var rep=[["Oui","Oui","Non","Non"],["Je t'aime bien","Non","Ne m'approche pas !!","Oui"],["Seules les femelles peuvent l'arborer","Oui","Seuls les mâles peuvent l'arborer","Non"],["Oui","Oui","Non","Non"],["Leur poil","Non","Leur salive","Oui"],["Vert/Jaune","Non","Bleu/grise","Oui"],["Plus de 4 doigts","Non","4 doigts","Oui"],["Non","Non","Oui","Oui"],["Oui","Oui","Non","Non"],["Non","Non","Oui","Oui"]];
@@ -121,7 +121,7 @@ var quizzy = function(a){
 }
 
 // BLACKCAT //
-function random(){
+function random(){//Fonction qui permet de choisir de maniere aleatoire la carte qui va apparaitre
   console.log(max,min);
   var idx=Math.floor(Math.random() * (max - min +1)) + min;
   while(id.includes(idx)===true){
@@ -137,11 +137,11 @@ function createImg(path) {
   return img;
 }
 
-function Score(index,sc){
-  if(sc<42){
-      value=carte[index].search(/\d/);
-      number=Number(carte[index][value]+carte[index][value+1]);
-      if(number===1){
+function Score(index,sc){//Fonction qui permet de calculer le score du joueur et du croupier en fonction du nom de la carte 
+  if(sc<42){//Condition du Marathon Jack
+      value=carte[index].search(/\d/);//Permet d'extraire la position du premier chiffre dans le nom de la carte
+      number=Number(carte[index][value]+carte[index][value+1]);//Permet d'obtenir la valeur (nombre) de la carte
+      if(number===1){//Specificite pour l'as
 	  if(sc+number>=42){
 	      sc=sc+1;
 	      return sc
@@ -151,7 +151,7 @@ function Score(index,sc){
 	      return sc
 	  }
       }
-      else{
+      else{//Ajoute la valeur de la carte au score du joueur
     sc=sc+Number(carte[index][value]+carte[index][value+1]);
 	  return sc
       }
@@ -163,10 +163,10 @@ function Score(index,sc){
 }
 
 
-var startagain=function(){
+var startagain=function(){//Fonction qui relance le jeu a chaque fois que l'on appuie sur le bouton startagain mais aussi lorsqu'il y a une nouvelle tentative 
   var divJ = document.getElementById("Joueur");
   var longueur = divJ.childNodes.length;
-  for (var k = 3; k<longueur;k++){
+  for (var k = 3; k<longueur;k++){ //Retire toutes les cartes de la tentatives précédentes
     divJ.removeChild(divJ.childNodes[3]);
   }
   var divC = document.getElementById("Croupier");
@@ -174,6 +174,7 @@ var startagain=function(){
   for (var k = 3; k<longueur;k++){
     divC.removeChild(divC.childNodes[3]);
   }
+    //Remise a zero de toutes les variables initiales
   imgD=document.getElementById("dealer");
   imgJ=document.getElementById("your");
   id=[];
@@ -194,21 +195,21 @@ var startagain=function(){
   score=Score(idxJ,score);
   var scoreJ=document.getElementById("score_joueur");
   scoreJ.textContent=score;
-  attempt=attempt+1;
+  attempt=attempt+1; //Aug le nombre de tentative
   var life = document.getElementById("life");
   life.textContent=3-attempt;
-  if (attempt===4){
+  if (attempt===4){//Si jamais le nombre de tentative arrive a 4 alors le joueur a perdu ses chances de gagner le mini jeu
     attempt=1;
     var life = document.getElementById("life");
     life.textContent=3-attempt;
-    play(1,attempt);
+    play(1,attempt);//Reactive l'arbre de mini jeux et desactive le mini jeu en cours 
   }
 }
 
-function addImgInDiv() {
+function addImgInDiv() {//Fonction qui ajoute les cartes a chaque fois que le joueur souhaite tirer une carte. Le score est egalement mis a jour et on verifie si le joueur gagne ou pas contre le croupier
   if(id.length!==52){
-    if(this.id==="Stay"){
-      while(scoreD<score===true){
+    if(this.id==="Stay"){//Si on clique sur le bouton Stay
+      while(scoreD<score===true){//Ajoute des cartes au croupier. Le croupier est programme pour qu'il est toujours un score plus haut que le joueur
         idxD=random();
         var pathC = "Img/arriere.png";
         var newImgC = createImg(pathC);
@@ -251,7 +252,7 @@ function addImgInDiv() {
         play(1,[1,attempt]);
       }
     }
-    else if(this.id==="Card"){
+    else if(this.id==="Card"){//Ajoute une carte au joueur
       idxJ=random();
       var pathJ = carte[idxJ];
       var newImgJ = createImg(pathJ);
@@ -264,7 +265,7 @@ function addImgInDiv() {
       if(score===42){
         window.alert("Congratulations");
         startagain();
-        play(1,[1,attempt]);
+        play(6.1,[1,attempt_pfc]);
       }
       else if(score>42){
         window.alert("Defaite");
@@ -274,7 +275,7 @@ function addImgInDiv() {
   }
 }
 
-function blackcat(){
+function blackcat(){//Fonction qui etablie les evenements lies aux elements de la page 
   var imgD=document.getElementById("dealer");
   var imgJ=document.getElementById("your");
   var life = document.getElementById("life");
@@ -285,13 +286,13 @@ function blackcat(){
   idxJ=random();
   imgJ.src=carte[idxJ];
   score=Score(idxJ,score);
-  var scoreJ=document.getElementById("score_joueur");
+  var scoreJ=document.getElementById("score_joueur");//Mise a jour du score 
   scoreJ.textContent=score;
-  var newcard=document.getElementById("Card");
+  var newcard=document.getElementById("Card");//Clique sur le bouton Card
   newcard.addEventListener("click",addImgInDiv);
-  var stay=document.getElementById("Stay");
+  var stay=document.getElementById("Stay");//Clique sur le bouton Stay
   stay.addEventListener("click",addImgInDiv);
-  var start=document.getElementById("Start again");
+  var start=document.getElementById("Start again");//Clique sur le bouton Start again
   start.addEventListener("click",startagain);
 }
 
@@ -299,17 +300,17 @@ var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png",
 ,"Img/C5.png","Img/DC10.png","Img/DK10.png","Img/DP10.png","Img/DT10.png","Img/K2.png","Img/K3.png","Img/K4.png","Img/K5.png","Img/K6.png","Img/K7.png","Img/K8.png",
 "Img/K9.png","Img/K10.png","Img/P2.png","Img/P3.png","Img/P4.png","Img/P5.png","Img/P6.png","Img/P7.png","Img/P8.png","Img/P9.png","Img/P10.png","Img/RC10.png","Img/RK10.png",
 "Img/RP10.png","Img/RT10.png","Img/T2.png","Img/T3.png","Img/T4.png","Img/T6.png","Img/T7.png","Img/T8.png","Img/T9.png","Img/T10.png","Img/VC10.png","Img/VK10.png","Img/VP10.png",
-"Img/VT10.png","Img/T5.png"]
-var id=[];
+"Img/VT10.png","Img/T5.png"]//Variabale avec toutes les noms de cartes
+var id=[];//Variable qui contient tous les index generes aleatoirement par random
 var min=0;
-var max=carte.length-1;
+var max=carte.length-1;//Nombre de carte dans la variable choix 
 console.log(max);
-var score=0;
-var scoreD=0;
+var score=0;//Score du joueur
+var scoreD=0;//Score du croupier
 var value=0;
 var nbCardD=1;
 var nbCardJ=1;
-var attempt=1;
+var attempt=1;//Nb de tentatives par le joueur
 
 //Meowmory//
 function random_memory(x){ // Fonction qui va choisir au hazard un nombre entier parmis 0 à x
@@ -452,28 +453,28 @@ chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://
 
 //Cat Human Mouse//
 
-function random_pfc(m){
+function random_pfc(m){//Genere aleatoire un nombre qui correspondera a une carte dans la variable choix, de plus on enleve le choix effectue. 
     var idx=Math.floor(Math.random()*(m));
     var choose=choix[idx];
     choix.splice(idx,1);
     return choose;
 }
 
-function createImg_pfc(path) {
+function createImg_pfc(path) {//Permet de creer une nouvelle image representant les cartes. On attribue automatique la classe Carte. 
     var img = document.createElement('img');
     img.src = path;
     img.className="Carte";
     return img;
 }
 
-function done(y,img){
+function done(y,img){//Fonction effectue a chaque tour du pierre feuille ciseau. On enleve les cartes jouees au joueur et a l'ordinateur, on les mets alors dans la zone des mouvements precedents. 
     var path2=y.src;
     var newImg=createImg_pfc(img);
     var newImg2=createImg_pfc(path2);
     var div=document.getElementById("mvt");
     div.appendChild(newImg2);
     div.appendChild(newImg);
-    y.parentNode.removeChild(y);
+    y.parentNode.removeChild(y);//Enleve la carte jouee
     var com=document.getElementById(x.toString());
     com.parentNode.removeChild(com);
     x=x-1;
@@ -484,9 +485,9 @@ function done(y,img){
     max_pfc=max_pfc-1;
 }
 
-function action(){
-    if(score<2 && pc<2){
-	comp=random_pfc(max_pfc);
+function action(){//Fonction qui verifie a chaque clic (tour) qui gagne le tour et effectue les fonctions associees. 
+    if(score_pfc<2 && pc<2){
+	comp=random_pfc(max_pfc);//Choix effectue
 	if(this.id==="human"){
 	    var test="human";
 	    if(comp==="Img/PFC/chat.png"){
@@ -529,40 +530,43 @@ function action(){
 		window.alert("Même carte, remise en jeu");
 	    }
 	}
-	if(pc===1 && score===1){
+	if(pc===1 && score_pfc===1){
 	    window.alert("Egalité")
-	    restart_pfc();
+	    restart_pfc("Egalite");
 	}
     }
-    else if(score===2){
-	window.alert("Gagné")
+    else if(score_pfc===2){
+	window.alert("Gagné");
+	restart_pfc("Win");
+	play(6.1,[1,attempt_pfc]);//Permet de relancer l'arbre de mini jeux et de fermer le mini jeux en cours. 
     }
     else if(pc===2){
 	window.alert("Défaite")
-	restart_pfc();
+	restart_pfc("Defeat");
     }
 }
 
-function restart_pfc(){
+function restart_pfc(type){//Fonction qui relance le mini jeux a chaque tentative. 
   var img=document.getElementById("1");
   img.parentNode.removeChild(img);
   var img1=document.getElementsByClassName("Carte");
   img1[0].parentNode.removeChild(img1[0]);
   var divC=document.getElementById("Cc");
   var path="Img/PFC/arriere.png";
-  for(var k=0;k<3;k++){
+  for(var k=0;k<3;k++){//On creait de nouveau les cartes de l'ordinateur
     var newImg=createImg_pfc(path);
     var id=k+1
     newImg.id=id.toString();
     divC.appendChild(newImg);
   }
-  var divJ=document.getElementById("Yc");
+    var divJ=document.getElementById("Yc");
+    //On creait de nouveau les cartes du jouer 
   var path1="Img/PFC/chat.png";
   var path2="Img/PFC/mulot.png";
   var path3="Img/PFC/human.png";
   var nI1=createImg_pfc(path1);
-  nI1.id="chat";
-  nI1.addEventListener("click",action);
+  nI1.id="chat";//On determine l'id de chaque carte 
+  nI1.addEventListener("click",action);//On ajoute un evenement aux cartes du joueur. 
   divJ.appendChild(nI1);
   var nI2=createImg_pfc(path2);
   nI2.id="mulot";
@@ -574,34 +578,46 @@ function restart_pfc(){
   divJ.appendChild(nI3);
   var divR=document.getElementById("mvt");
   var longueur=divR.childNodes.length;
-  for(var k=3;k<longueur;k++){
+  for(var k=3;k<longueur;k++){//On nettoie la zone mouvement precedent
     divR.removeChild(divR.childNodes[3]);
   }
   choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]
   max_pfc=choix.length;
   x=3;
-  score=0;
+  score_pfc=0;
   pc=0;
-  var sc=document.getElementById("score_pfc");
+  var sc=document.getElementById("score_pfc");//Changement du score
   sc.textContent=score_pfc;
   var sc2=document.getElementById("score_pc");
   sc2.textContent=pc;
+  if(type!="Egalite"){//Si il n'y a pas egalite entre le joueur et l'ordinateur alors on effectue une nouvelle tentative, le nombre de point que le joueur peut gagner change. 
+      attempt_pfc=attempt_pfc+1;
+      var life_pfc = document.getElementById("life_pfc");
+      life_pfc.textContent=3-attempt_pfc;
+      if (attempt_pfc===4){
+	  attempt_pfc=1;
+	  var life_pfc = document.getElementById("life_pfc");
+	  life_pfc.textContent=3-attempt_pfc;
+	  play(1,attempt_pfc);
+      }
+  }
   seven++; // Le jeu est fini on ajoute donc 1 a seven
   finish(plateau,base); // ON vérifie si le plateau n'est pas complet
 }
 
-function pfc(){
+function pfc(){//Evenement du pierre feuille ciseaux
     var joueur=document.getElementsByClassName("Carte");
     joueur[0].addEventListener("click",action);
     joueur[1].addEventListener("click",action);
     joueur[2].addEventListener("click",action);
 }
 
-var choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]
+var choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]//Variable contenant les cartes 
 var max_pfc=choix.length;
 var x=3;
-var score_pfc=0;
-var pc=0;
+var score_pfc=0;//Score du joueur
+var pc=0;//Score de l'ordinateur 
+var attempt_pfc=1;//Nb de tentative 
 
 // MAIN //
 var finish=function(plateau,base){ // Cette fonction vérifie si le jeu a été fini ou non
@@ -739,7 +755,20 @@ var play = function(type,points){ // Cette fonction permet de coordonner les dif
     pifeci.style.display="block";
     pfc();
   }
+  else if(type===6.1){
+    var gameboard = document.getElementById("gameboard");
+    var blacat = document.getElementById("PFC");
+    gameboard.style.display="block";
+    PFC.style.display="none";
+    get_scored(points); // ON compte le nombre de points obtenus par le joueur
+    attempt_pfc=1; //  On remet à éro le nombre de tentatives du joueur pour le prochain black_cat
+    score_pfc=0; // On remet son score à zéro
+    pc=0; // ainsi que celui de l'ordinateur
+    seven++; // Le jeu est fini on ajoute donc 1 a seven
+    finish(plateau,base); // ON vérifie si le plateau n'est pas complet
+  }
 }
+    
 var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre à chat
   var tree = document.getElementById("gameboard");
   if (tree.style.display!='none'){
