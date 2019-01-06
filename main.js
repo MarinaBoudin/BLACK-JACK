@@ -499,7 +499,6 @@ function action(){
 	    }
 	    else if(comp==="Img/PFC/human.png"){
 		window.alert("Même carte, remise en jeu");
-		comp=random_pfc(max);
 	    }
 	}
 	else if(this.id==="chat"){
@@ -514,7 +513,6 @@ function action(){
 	    }
 	    else if(comp==="Img/PFC/chat.png"){
 		window.alert("Même carte, remise en jeu");
-		comp=random_pfc(max);
 	    }
 	}
 	else if(this.id==="mulot"){
@@ -529,7 +527,6 @@ function action(){
 	    }
 	    else if(comp==="Img/PFC/mulot.png"){
 		window.alert("Même carte, remise en jeu");
-		comp=random_pfc(max);
 	    }
 	}
 	if(pc===1 && score===1){

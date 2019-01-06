@@ -6,11 +6,10 @@ function random_pfc(m){
 }
 
 function createImg(path) {
-  var img = document.createElement('img');
+    var img = document.createElement('img');
     img.src = path;
     img.className="Carte";
-    img.addEventListener("click",action)
-  return img;
+    return img;
 }
 
 function done(y,img){
@@ -46,7 +45,6 @@ function action(){
 	    }
 	    else if(comp==="../Img/PFC/human.png"){
 		window.alert("Même carte, remise en jeu");
-		comp=random_pfc(max);
 	    }
 	}
 	else if(this.id==="chat"){
@@ -61,7 +59,6 @@ function action(){
 	    }
 	    else if(comp==="../Img/PFC/chat.png"){
 		window.alert("Même carte, remise en jeu");
-		comp=random_pfc(max);
 	    }
 	}
 	else if(this.id==="mulot"){
@@ -76,7 +73,6 @@ function action(){
 	    }
 	    else if(comp==="../Img/PFC/mulot.png"){
 		window.alert("Même carte, remise en jeu");
-		comp=random_pfc(max);
 	    }
 	}
 	if(pc===1 && score===1){
@@ -112,12 +108,15 @@ function restart(){
     var path3="../Img/PFC/human.png";
     var nI1=createImg(path1);
     nI1.id="chat";
+    nI1.addEventListener("click",action);
     divJ.appendChild(nI1);
     var nI2=createImg(path2);
     nI2.id="mulot";
+    nI2.addEventListener("click",action);
     divJ.appendChild(nI2);
     var nI3=createImg(path3);
     nI3.id="human";
+    nI3.addEventListener("click",action);
     divJ.appendChild(nI3);
     var divR=document.getElementById("res");
     var longueur=divR.childNodes.length;
