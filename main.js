@@ -470,15 +470,15 @@ function done(y,img){
     var path2=y.src;
     var newImg=createImg_pfc(img);
     var newImg2=createImg_pfc(path2);
-    var div=document.getElementById("res");
+    var div=document.getElementById("mvt");
     div.appendChild(newImg2);
     div.appendChild(newImg);
     y.parentNode.removeChild(y);
     var com=document.getElementById(x.toString());
     com.parentNode.removeChild(com);
     x=x-1;
-    var sc=document.getElementById("score_joueur");
-    sc.textContent=score;
+    var sc=document.getElementById("score_pfc");
+    sc.textContent=score_pfc;
     var sc2=document.getElementById("score_pc");
     sc2.textContent=pc;
     max=max-1;
@@ -490,7 +490,7 @@ function action(){
 	if(this.id==="human"){
 	    var test="human";
 	    if(comp==="Img/PFC/chat.png"){
-		score=score+1;
+		score_pfc=score_pfc+1;
 		done(this,comp);
 	    }
 	    else if(comp==="Img/PFC/mulot.png"){
@@ -508,7 +508,7 @@ function action(){
 		done(this,comp);
 	    }
 	    else if(comp==="Img/PFC/mulot.png"){
-		score=score+1;
+		score_pfc=score_pfc+1;
 		done(this,comp);
 	    }
 	    else if(comp==="Img/PFC/chat.png"){
@@ -518,7 +518,7 @@ function action(){
 	else if(this.id==="mulot"){
 	    var test="mulot"
 	    if(comp==="Img/PFC/human.png"){
-		score=score+1;
+		score_pfc=score_pfc+1;
 		done(this,comp);
 	    }
 	    else if(comp==="Img/PFC/chat.png"){
@@ -572,7 +572,7 @@ function restart_pfc(){
     nI3.id="human";
     nI3.addEventListener("click",action);
     divJ.appendChild(nI3);
-    var divR=document.getElementById("res");
+    var divR=document.getElementById("mvt");
     var longueur=divR.childNodes.length;
     for(var k=3;k<longueur;k++){
 	divR.removeChild(divR.childNodes[3]);
@@ -582,8 +582,8 @@ function restart_pfc(){
     x=3;
     score=0;
     pc=0;
-    var sc=document.getElementById("score_joueur");
-    sc.textContent=score;
+    var sc=document.getElementById("score_pfc");
+    sc.textContent=score_pfc;
     var sc2=document.getElementById("score_pc");
     sc2.textContent=pc;
 }
@@ -598,7 +598,7 @@ function pfc(){
 var choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]
 var max=choix.length;
 var x=3;
-var score=0;
+var score_pfc=0;
 var pc=0;
 
 // MAIN //
@@ -792,11 +792,11 @@ var setupListener = function(plateau,base){
 }
 var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,[3,6],0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,[3,1],0,0,0,0],
-[0,0,1,1,5,1,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,5,0,0,1,1,4,1,1,0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,4,1,1,0,0,0,0,1,0,0,0,0,4,0],
+[0,0,1,5,1,6,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,5,0,0,1,6,1,4,1,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,4,1,6,1,0,0,0,0,1,0,0,0,0,4,0],
 [0,0,0,0,4,0,0,0,0,[3,4],0,0,0,[3,9],0,0,0,1,0,0,0,0,0,0,5,1,1,[3,8],1,1,0],
-[0,0,0,0,1,0,0,0,0,1,1,4,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
-[0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,1,1,4,1,1,5,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,1,4,1,6,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
+[0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,6,1,4,1,1,5,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,5,1,1,[3,2],1,1,4,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,1,6,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
@@ -804,11 +804,11 @@ var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,7,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,0,0],
-[0,0,1,1,7,1,1,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,1,1,7,1,1,0,0,0,0],
-[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,7,1,1,0,0,0,0,1,0,0,0,0,7,0],
+[0,0,1,7,1,7,1,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,1,7,1,7,1,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,7,1,7,1,0,0,0,0,1,0,0,0,0,7,0],
 [0,0,0,0,7,0,0,0,0,7,0,0,0,7,0,0,0,1,0,0,0,0,0,0,7,1,1,7,1,1,0],
-[0,0,0,0,1,0,0,0,0,1,1,7,1,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
-[0,0,0,0,7,0,0,0,0,0,0,1,0,0,0,0,0,7,1,7,1,1,1,7,1,1,7,0,0,0,0],
+[0,0,0,0,1,0,0,0,0,1,7,1,7,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0],
+[0,0,0,0,7,0,0,0,0,0,0,1,0,0,0,0,0,7,1,7,1,7,1,7,1,1,7,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,7,1,1,7,1,1,7,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,1,7,1,1,1,7,1,1,7,1,1,0,0,0,0,0,0,0,0,0],
