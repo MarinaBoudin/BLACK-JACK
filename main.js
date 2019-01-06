@@ -775,8 +775,8 @@ var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre Ã
         else if (column===5){ // Si la valeur est de 5 alors c'est une partie de meowmory qui sera cyan
           canvas_grid.style.backgroundColor="#39ac73";
         }
-        else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera
-          canvas_grid.style.backgroundColor="green";
+        else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera rose pale. 
+          canvas_grid.style.backgroundColor="#D2B48C";
         }
         else if ((typeof column)=="object"){ // SI c'est un object alors c'est le questionnaire
           if (column[0]===3) { // La couleur de la case sera donc violette
