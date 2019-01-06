@@ -1,27 +1,27 @@
-goal=0;
-var get_scored = function(a){
-  if (a[0]===1){
-    if(a[1]>=2){
-      goal=goal+(4-(a[1]-1));
+goal=0; // Score du joueur au départ
+var get_scored = function(jeu){ // Fonction qui va compter les points du joueur selon le jeu et selon le nmbre de points qu'il a gagné
+  if (jeu[0]===1){ // Pour le jeu black-cat qui dépend du nombre de tentatives du joueur au jeu
+    if(jeu[1]>=2){
+      goal=goal+(4-(jeu[1]-1));
     }
   }
-  else if (a[0]===2){
-    if (a[1]===0){
+  else if (jeu[0]===2){ // Pour le cat quizzy, le joueur gagne deux points s'il répond juste au quizz
+    if (jeu[1]===0){
       goal=goal+2;
     }
   }
-  else if (a[0]===3){
-    if (a[1]<=50){
+  else if (jeu[0]===3){ // Pour le meowmory, le joueur gagne des points selon le nombre de coups
+    if (jeu[1]<=50){
       goal=goal+3;
     }
-    else if(a[1]<=100){
+    else if(jeu[1]<=100){
       goal=goal+2;
     }
-    else if(a[1]>100){
+    else if(jeu[1]>100){
       goal=goal+1;
     }
   }
-  var go = document.getElementById("go");
+  var go = document.getElementById("go"); // On réactualise le score sur la page html
   go.textContent=goal;
 }
 
@@ -304,41 +304,40 @@ var nbCardJ=1;
 var attempt=1;
 
 //Meowmory//
-function random_memory(x){
-  var idx=Math.floor(Math.random() * (x));
-  return idx;
+function random_memory(x){ // Fonction qui va choisir au hazard un nombre entier parmis 0 à x
+  var alea_num=Math.floor(Math.random() * (x));
+  return alea_num;
 }
-function createImg_memory(path) {
+function createImg_memory(path) { // Fonction qui permettre de créer les images retournées du meowmory
   var img = document.createElement('img');
   img.src = "Img/memory/cat.png";
   img.style.width="15%";
-  img.onclick=function(){
+  img.onclick=function(){ // Cette partie ajoute un évennement à l'image, si on clique dessus alors on fait appel a memory et verif
     memory(path);
     verif();
   };
   return img;
 }
-var retourner=function(){
+var retourner=function(){ // Cette fonction permet de savoir si les images retournées par l'uttilisateur sont identiques ou non
   var txt = document.getElementById("res");
-  if(list[0].src.slice(53,56)!=list[1].src.slice(53,56)){
-    console.log(list[0].src.slice(53,56),list[1].src.slice(53,56))
-    for (var i of list){
+  if(list[0].src.slice(53,56)!=list[1].src.slice(53,56)){ // Si elles sont différentes alors on remet retourne les images et on indique que les deux images retournées ne sont pas identiques
+    for (var i of list){ // Je précise que le cadre à côté des cartes sert à montrer les cartes qui snt retournée par le joueur
       i.id=i.src;
       i.src="Img/memory/cat.png";
     }
     txt.textContent="Wrong";
   }
-  else{
+  else{ // Si elles sont identiques elles restent retournées et on change leur id par good
     list[0].id="good";
     list[1].id="good";
     txt.textContent="Good";
   }
-  list=[];
+  list=[]; // Cette liste contient à chaque fois les cartes retournées, elle est remise à zéro pour contenir les cartes qui ont être retournées par la suite
 }
-var restart=function(){
-  get_scored([3,coups]);
-  coups=0;
-  var div= document.getElementById("cat");
+var restart_meowmory=function(){ // Cette fonction sera uttilisée pour remettre le jeu à zéro
+  get_scored([3,coups]); // On calcule d'abord le nombre de points obtenu par le joueur à partir du nombre de coups qui a fait
+  coups=0; // ON remeyt lenombre de coups à zéro
+  var div= document.getElementById("cat"); // On supprime toutes les cartes
   var longueur = div.childNodes.length;
   for (var k = 0; k<longueur;k++){
     div.removeChild(div.childNodes[0]);
@@ -351,16 +350,7 @@ var restart=function(){
     "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
     "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
     "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
-  let order=set(chats);
-  var div = document.getElementById("cat");
-  let di = 1;
-  for (var k of order){
-    var newi = createImg_memory(k);
-    newi.id=`${k}`;
-    newi.className="card";
-    div.appendChild(newi);
-    di++;
-  }
+  memories(chats); // On replace les cartes dans un ordre aléatoire
   var un = document.getElementById("un");
   un.src="Img/memory/cat.png";
   un.style.width="50%";
@@ -369,13 +359,13 @@ var restart=function(){
   deux.style.width="50%";
   var txt = document.getElementById("res");
   txt.textContent="?";
-  var gameboard = document.getElementById("gameboard");
+  var gameboard = document.getElementById("gameboard"); // On remet le joueur sur le plateau en cachant le meowmory et en faisant apparaître le plateau
   var meowmory = document.getElementById("Meowmory");
   gameboard.style.display="block";
   meowmory.style.display="none";
 }
-var verif=function(){
-  var cards=document.getElementsByClassName("card");
+var verif=function(){ // Cette fonction va vérifier à quelle moment le jeu en est et éffectuer les actions requises
+  var cards=document.getElementsByClassName("card"); // On calcule tout d'abord le nombre de cartes retournées sur le plateau
   card=0;
   good=0;
   for (var k of cards){
@@ -383,7 +373,7 @@ var verif=function(){
       card++;
     }
   }
-  if (card==1){
+  if (card==1){ // Si il n'y en a qu'une alors on l'affiche dans l'image avec l'id un
     var un = document.getElementById("un");
     un.src=list[0].src;
     un.style.width="50%";
@@ -393,33 +383,33 @@ var verif=function(){
     var txt = document.getElementById("res");
     txt.textContent="?";
   }
-  if(card===2){
+  if(card===2){ // Si il y en a deux alors on affiche la deuxième dans l'image avec l'id deux et on lance la fonction retourner
     var deux = document.getElementById("deux");
     deux.src=list[1].src;
     deux.style.width="50%";
     retourner();
   }
-  for (var k of cards){
+  for (var k of cards){ // On calcule le nombre de cartes qui possède un id good, donc celle qui ont été bien retournée avec leur paire
     if (k.id=="good"){
       good++;
     }
   }
-  if (good===24){
-    restart();
+  if (good===24){ // Si le nombre de cartes good est de 24 alors le joueur les as toutes retournée on peut recommencer le jeu à zéro
+    restart_meowmory();
   }
 }
-var set = function(img){
+var set = function(liste_img){ // Cette fonction permet de mélanger aléatoirement les images de liste_img
   L=[];
-  let b=img.length;
-  let c=img.length;
+  let b=liste_img.length;
+  let c=liste_img.length;
   for (let k = 0; k<c; k++){
     a=random_memory(b);
-    L.push(img.splice(a,1));
+    L.push(liste_img.splice(a,1));
     b--;
   }
   return L;
 }
-var memory = function(id){
+var memory = function(id){ // Cette fonction permet de retourner la carte, augmenter le nombre de coup de 1 etde l'ajouter à list qui est la liste des cartes retournées
   coups++;
   var coup =document.getElementById("coups");
   coup.textContent=coups;
@@ -428,18 +418,18 @@ var memory = function(id){
   img.id="retourner";
   list.push(img);
 }
-var memories = function(){
+var memories = function(chats){ // Cette fonction permet de créer le plateau avec les cartes
   let order=set(chats);
   var div = document.getElementById("cat");
-  for (var k of order){
-    var newi = createImg_memory(k);
-    newi.id=`${k}`;
-    newi.className="card";
-    div.appendChild(newi);
+  for (var img_cat of order){
+    var new_img = createImg_memory(img_cat); // On crée une image avec l'image du chat
+    new_img.id=`${img_cat}`; // Son id sera sont chemin d'accès
+    new_img.className="card";
+    div.appendChild(new_img); // On l'ajoute à la division
   }
 }
-coups=0
-list=[];
+coups=0 // Nombre de cou au départ pour le joueur
+list=[]; // Liste des cartes retournées
 chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png",
   "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
   "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
@@ -447,7 +437,7 @@ chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://
   "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
   "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
   "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"]; // listes de images qui sont en doubles
 
 
 //Cat Human Mouse//
@@ -602,38 +592,38 @@ var score=0;
 var pc=0;
 
 // MAIN //
-var player = function(plateau){
-  for (var k = 0;k<=11;k++){
+var player = function(plateau){ // Cette fonction permet d'avoir la position du joueur dans le plateau
+  for (var k = 0;k<=11;k++){ // Pour chaque ligne du plateau
     var lign = plateau[k];
-    if (lign.indexOf(2)!=-1){
-      var ligne = k;
-      var colonne = lign.indexOf(2);
+    if (lign.indexOf(2)!=-1){ // Si 2 existe dans la ligne alors
+      var ligne = k; // On stock la valeur de ligne
+      var colonne = lign.indexOf(2);// et celle de la colonne
     }
   }
-  return [ligne,colonne];
+  return [ligne,colonne]; // On retourne les positions
 }
-var movetop = function(plateau,base){
+var movetop = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers le haut
   var pos = player(plateau);
   var new_position = plateau[pos[0]-1][pos[1]];
-  if (new_position!=0){
-    if ((typeof new_position)=="object"){
+  if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
+    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
       condition=[plateau[pos[0]-1][pos[1]][0],plateau[pos[0]-1][pos[1]][1]];
     }
     else{
       condition=new_position;
     }
     plateau[pos[0]-1][pos[1]] = 2;
-    plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau);
-    play(condition,0);
+    plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]]; // L'ancienne position reprend sa valeur de base dans base
+    affichage(plateau); // On réactualise le plateau à chaque mouvement
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
   }
-  affichage(plateau);
+  affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
-var movebottom = function(plateau,base){
+var movebottom = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers le bas
   var pos = player(plateau);
   var new_position = plateau[pos[0]+1][pos[1]];
-  if (new_position!=0){
-    if ((typeof new_position)=="object"){
+  if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
+    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
       condition=[plateau[pos[0]+1][pos[1]][0],plateau[pos[0]+1][pos[1]][1]];
     }
     else{
@@ -641,16 +631,16 @@ var movebottom = function(plateau,base){
     }
     plateau[pos[0]+1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau);
-    play(condition,0);
+    affichage(plateau); // On réactualise le plateau à chaque mouvement
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
   }
-  affichage(plateau);
+  affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
-var moveleft = function(plateau,base){
+var moveleft = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers la gauche
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]-1];
-  if (new_position!=0){
-    if ((typeof new_position)=="object"){
+  if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
+    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
       condition=[plateau[pos[0]][pos[1]-1][0],plateau[pos[0]][pos[1]-1][1]];
     }
     else{
@@ -658,16 +648,16 @@ var moveleft = function(plateau,base){
     }
     plateau[pos[0]][pos[1]-1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau);
-    play(condition,0);
+    affichage(plateau); // On réactualise le plateau à chaque mouvement
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
   }
-  affichage(plateau);
+  affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
-var moveright = function(plateau,base){
+var moveright = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers la droite
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]+1];
-  if (new_position!=0){
-    if ((typeof new_position)=="object"){
+  if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
+    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
       condition=[plateau[pos[0]][pos[1]+1][0],plateau[pos[0]][pos[1]+1][1]];
     }
     else{
@@ -675,46 +665,46 @@ var moveright = function(plateau,base){
     }
     plateau[pos[0]][pos[1]+1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau);
-    play(condition,0);
+    affichage(plateau); // On réactualise le plateau à chaque mouvement
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
   }
-  affichage(plateau);
+  affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
 
-var play = function(type,points){
-  if (type===4){
+var play = function(type,points){ // Cette fonction permet de coordonner les différents jeux et affichages
+  if (type===4){ // Ici on lance le black_cat
     var gameboard = document.getElementById("gameboard");
     var blacat = document.getElementById("blackcat");
     gameboard.style.display="none";
     blacat.style.display="block";
     blackcat();
   }
-  else if (type[0]===3) {
+  else if (type[0]===3) { // Ici on lance le quizzy cat
     var gameboard = document.getElementById("gameboard");
     var quizz = document.getElementById("quizz");
     gameboard.style.display="none";
     quizz.style.display="block";
-    quizzy(type[1])
-    clic=0
+    quizzy(type[1]) // Le quizzy cat prend aussi la valeur de la question qui sera posée car plusieurs questions
+    clic=0 // Ici on remet le nombre de clics à zéro pour la prochaine question
   }
-  else if (type===1){
+  else if (type===1){ // Ici on relance le plateau après un jeu de black_cat
     var gameboard = document.getElementById("gameboard");
     var blacat = document.getElementById("blackcat");
     gameboard.style.display="block";
     blacat.style.display="none";
-    get_scored(points);
-    attempt=1;
-    score=0;
-    scoreD=0;
+    get_scored(points); // ON compte le nombre de points obtenus par le joueur
+    attempt=1; //  On remet à éro le nombre de tentatives du joueur pour le prochain black_cat
+    score=0; // On remet son score à zéro
+    scoreD=0; // ainsi que celui du croupier
   }
-  else if (type===5){
+  else if (type===5){ // Ici on lance le meowmory
     var gameboard = document.getElementById("gameboard");
     var meowmory = document.getElementById("Meowmory");
     gameboard.style.display="none";
     meowmory.style.display="block";
-    memories();
+    memories(chats);
   }
-  else if (type===6){
+  else if (type===6){ // Ici on lance le cat human mouse
     var gameboard = document.getElementById("gameboard");
     var pifeci = document.getElementById("PFC");
     gameboard.style.display="none";
@@ -722,57 +712,57 @@ var play = function(type,points){
     pfc();
   }
 }
-var affichage = function(plateau){
+var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre à chat
   var tree = document.getElementById("gameboard");
   if (tree.style.display!='none'){
-    var div = document.createElement("div");
-    var old_div = document.getElementById("plateau");
+    var div = document.createElement("div"); // On crée un nouveau plateau
+    var old_div = document.getElementById("plateau"); // On cache l'ancien plateau
     old_div.id="old";
     old_div.style.display="none";
     div.id="plateau";
     div.style.width="1550px";
     div.style.height="600px";
     div.style.margin="auto";
-    var gameboard = document.getElementById("gameboard");
+    var gameboard = document.getElementById("gameboard"); // On ajoute le nouveau plateau au gameboard
     gameboard.appendChild(div);
-    for (var lign of plateau){
+    for (var lign of plateau){ // Puis on ajoute une à une les cases du plateau selon leurs valeurs
       for (var column of lign){
         var canvas_grid = document.createElement("canvas");
-        if (column===0){
+        if (column===0){ // Si la valeur est de 0 alors c'est une case vide qui sera blanche
           canvas_grid.style.backgroundColor="white";
         }
-        else if (column===1) {
+        else if (column===1) { // Si la valeur est de 1 alors c'est une branche de l'abre qui sera noir
           canvas_grid.style.backgroundColor="black";
         }
-        else if (column===2) {
+        else if (column===2) { // Si la valeur est 2 alors c'est la position du joueur qui sera bleu ciel
           canvas_grid.style.backgroundColor="#0099ff";
         }
-        else if (column===7){
+        else if (column===7){ // Si la valeur est de 7 alors c'est un jeu qui a déjà été joué qui sera jaune
           canvas_grid.style.backgroundColor="yellow";
         }
-        else if (column===4){
+        else if (column===4){ // Si la valeur est de 4 alors c'est une partie de black_cat qui sera rouge
           canvas_grid.style.backgroundColor="#cc0000";
         }
-        else if (column===5){
+        else if (column===5){ // Si la valeur est de 5 alors c'est une partie de meowmory qui sera cyan
           canvas_grid.style.backgroundColor="#39ac73";
         }
-        else if (column===6){
+        else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera
           canvas_grid.style.backgroundColor="green";
         }
-        else if ((typeof column)=="object"){
-          if (column[0]===3) {
+        else if ((typeof column)=="object"){ // SI c'est un object alors c'est le questionnaire
+          if (column[0]===3) { // La couleur de la case sera donc violette
             canvas_grid.style.backgroundColor="#7300e6";
           }
         }
         canvas_grid.style.width="50px";
         canvas_grid.style.height="50px";
-        div.appendChild(canvas_grid);
+        div.appendChild(canvas_grid); // On ajoute la canvas à chaque fois
       }
     }
   }
 }
-var setupListener = function(plateau,base){
-  affichage(plateau);
+var setupListener = function(plateau,base){ // Cette fonction coordonne les évennements de l'arbre à chat
+  affichage(plateau); // On affiche le plateau
   var top = document.getElementById("Top");
   top.addEventListener("click",function(){movetop(plateau,base)});
   var bottom = document.getElementById("Bottom");
@@ -781,7 +771,7 @@ var setupListener = function(plateau,base){
   right.addEventListener("click",function(){moveright(plateau,base)});
   var left = document.getElementById("Left");
   left.addEventListener("click",function(){moveleft(plateau,base)});
-  var jack = document.getElementById("quizz");
+  var jack = document.getElementById("quizz"); // On cache au départ tous les jeux on ne garde que l'arbre à chat
   var quizz = document.getElementById("blackcat");
   var Meowmory=document.getElementById("Meowmory");
   var pifeci=document.getElementById("PFC");
@@ -799,9 +789,9 @@ var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,1,1,4,1,1,5,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,5,1,1,[3,2],1,1,4,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,6,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,5,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]; // C'est le plateau de jeu avec tous les jeux qui sont placés
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,7,0,0,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,0,0],
 [0,0,1,1,7,1,1,0,0,0,0,0,0,0,0,7,0,0,0,7,0,0,1,1,7,1,1,0,0,0,0],
@@ -813,5 +803,5 @@ var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,7,1,1,7,1,1,7,1,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,1,7,1,1,1,7,1,1,7,1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
-window.addEventListener("load",function(){setupListener(plateau,base)});
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]; // C'est la base du plateau
+window.addEventListener("load",function(){setupListener(plateau,base)}); 
