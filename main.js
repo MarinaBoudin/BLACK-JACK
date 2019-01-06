@@ -44,8 +44,8 @@ var answer = function(a){
       var quizz = document.getElementById("quizz");
       gameboard.style.display="block";
       quizz.style.display="none";
-      seven++;
-      finish(plateau,base);
+      seven++; // Le jeu est fini on ajoute donc 1 a seven
+      finish(plateau,base); // ON vérifie si le plateau n'est pas complet
     });
   }
   else if(this.value==="Non"){
@@ -59,8 +59,8 @@ var answer = function(a){
       var quizz = document.getElementById("quizz");
       gameboard.style.display="block";
       quizz.style.display="none";
-      seven++;
-      finish(plateau,base);
+      seven++; // Le jeu est fini on ajoute donc 1 a seven
+      finish(plateau,base); // ON vérifie si le plateau n'est pas complet
     });
   }
   else if (this.value==="IDK"){
@@ -73,8 +73,8 @@ var answer = function(a){
       var quizz = document.getElementById("quizz");
       gameboard.style.display="block";
       quizz.style.display="none";
-      seven++;
-      finish(plateau,base);
+      seven++; // Le jeu est fini on ajoute donc 1 a seven
+      finish(plateau,base); // ON vérifie si le plateau n'est pas complet
     });
   }
     }
@@ -371,8 +371,8 @@ var restart_meowmory=function(){ // Cette fonction sera uttilisée pour remettre
   var meowmory = document.getElementById("Meowmory");
   gameboard.style.display="block";
   meowmory.style.display="none";
-  seven++;
-  finish(plateau,base);
+  seven++; // Le jeu est fini on ajoute donc 1 a seven
+  finish(plateau,base); // ON vérifie si le plateau n'est pas complet
 }
 var verif=function(){ // Cette fonction va vérifier à quelle moment le jeu en est et éffectuer les actions requises
   var cards=document.getElementsByClassName("card"); // On calcule tout d'abord le nombre de cartes retournées sur le plateau
@@ -586,8 +586,8 @@ function restart_pfc(){
   sc.textContent=score_pfc;
   var sc2=document.getElementById("score_pc");
   sc2.textContent=pc;
-  seven++;
-  finish(plateau,base);
+  seven++; // Le jeu est fini on ajoute donc 1 a seven
+  finish(plateau,base); // ON vérifie si le plateau n'est pas complet
 }
 
 function pfc(){
@@ -604,11 +604,10 @@ var score_pfc=0;
 var pc=0;
 
 // MAIN //
-var finish=function(plateau,base){
-  console.log(seven);
-  if (seven===34){
-    window.alert(`Ton score est de ${goal}/77. Le jeu est fini bravo !`);
-    location.reload();
+var finish=function(plateau,base){ // Cette fonction vérifie si le jeu a été fini ou non
+  if (seven===34){ // Il y a 34 jeux seven compte le nombre de jeux déjà joués
+    window.alert(`Ton score est de ${goal}/95. Le jeu est fini bravo !`);
+    location.reload(); // A la fin on relance la page après avoir donné son crore au joueur
   }
 }
 var player = function(plateau){ // Cette fonction permet d'avoir la position du joueur dans le plateau
@@ -723,8 +722,8 @@ var play = function(type,points){ // Cette fonction permet de coordonner les dif
     attempt=1; //  On remet à éro le nombre de tentatives du joueur pour le prochain black_cat
     score=0; // On remet son score à zéro
     scoreD=0; // ainsi que celui du croupier
-    seven++;
-    finish(plateau,base);
+    seven++; // Le jeu est fini on ajoute donc 1 a seven
+    finish(plateau,base); // ON vérifie si le plateau n'est pas complet
   }
   else if (type===5){ // Ici on lance le meowmory
     var gameboard = document.getElementById("gameboard");
@@ -775,7 +774,7 @@ var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre �
         else if (column===5){ // Si la valeur est de 5 alors c'est une partie de meowmory qui sera cyan
           canvas_grid.style.backgroundColor="#39ac73";
         }
-        else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera rose pale. 
+        else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera rose pale.
           canvas_grid.style.backgroundColor="#D2B48C";
         }
         else if ((typeof column)=="object"){ // SI c'est un object alors c'est le questionnaire
