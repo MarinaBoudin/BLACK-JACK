@@ -27,60 +27,60 @@ var get_scored = function(jeu){ // Fonction qui va compter les points du joueur 
 
 //CAT QUIZZY//
 var clic=0; //Compteur du nombre de clic afin que le joueur ne puisse repondre qu'une seule fois
-var answer = function(a){//Fonction qui verifie si la reponse est bonne ou non 
+var answer = function(a){//Fonction qui verifie si la reponse est bonne ou non
   clic=clic+1
   var img=document.getElementById("omnia");
   var rep=document.getElementById("rep");
   var next =document.getElementById("Next");
   if(clic===1){
-  if(this.value==="Oui"){
-    img.src="Img/Question/bonne.JPG";
-    next.style.display="inline-block";
-    rep.style.display="block";
-    var what=[2,0];
-    get_scored(what);
-    next.addEventListener("click",function(){
-      var gameboard = document.getElementById("gameboard");
-      var quizz = document.getElementById("quizz");
-      gameboard.style.display="block";
-      quizz.style.display="none";
-      seven++; // Le jeu est fini on ajoute donc 1 a seven
-      finish(plateau,base); // ON vérifie si le plateau n'est pas complet
-    });
-  }
-  else if(this.value==="Non"){
-    img.src="Img/Question/mauvaise.JPG";
-    next.style.display="inline-block";
-    rep.style.display="block";
-    what=[2,1];
-    get_scored(what);
-    next.addEventListener("click",function(){
-      var gameboard = document.getElementById("gameboard");
-      var quizz = document.getElementById("quizz");
-      gameboard.style.display="block";
-      quizz.style.display="none";
-      seven++; // Le jeu est fini on ajoute donc 1 a seven
-      finish(plateau,base); // ON vérifie si le plateau n'est pas complet
-    });
-  }
-  else if (this.value==="IDK"){
-    img.src="Img/Question/idk.gif";
-    rep.textContent="Je suis sûre que vous savez !!";
-    what=[2,1];
-    get_scored(what);
-    next.addEventListener("click",function(){
-      var gameboard = document.getElementById("gameboard");
-      var quizz = document.getElementById("quizz");
-      gameboard.style.display="block";
-      quizz.style.display="none";
-      seven++; // Le jeu est fini on ajoute donc 1 a seven
-      finish(plateau,base); // ON vérifie si le plateau n'est pas complet
-    });
-  }
+    if(this.value==="Oui"){
+      img.src="Img/Question/bonne.JPG";
+      next.style.display="inline-block";
+      rep.style.display="block";
+      var what=[2,0];
+      get_scored(what);
+      next.addEventListener("click",function(){
+        var gameboard = document.getElementById("gameboard");
+        var quizz = document.getElementById("quizz");
+        gameboard.style.display="block";
+        quizz.style.display="none";
+        seven++; // Le jeu est fini on ajoute donc 1 a seven
+        finish(plateau,base); // ON vérifie si le plateau n'est pas complet
+      });
     }
-    else{
-	window.alert("Vous avez déjà cliqué, veuillez appuyer sur Next")
+    else if(this.value==="Non"){
+      img.src="Img/Question/mauvaise.JPG";
+      next.style.display="inline-block";
+      rep.style.display="block";
+      what=[2,1];
+      get_scored(what);
+      next.addEventListener("click",function(){
+        var gameboard = document.getElementById("gameboard");
+        var quizz = document.getElementById("quizz");
+        gameboard.style.display="block";
+        quizz.style.display="none";
+        seven++; // Le jeu est fini on ajoute donc 1 a seven
+        finish(plateau,base); // On vérifie si le plateau n'est pas complet
+      });
     }
+    else if (this.value==="IDK"){
+      img.src="Img/Question/idk.gif";
+      rep.textContent="Je suis sûre que vous savez !!";
+      what=[2,1];
+      get_scored(what);
+      next.addEventListener("click",function(){
+        var gameboard = document.getElementById("gameboard");
+        var quizz = document.getElementById("quizz");
+        gameboard.style.display="block";
+        quizz.style.display="none";
+        seven++; // Le jeu est fini on ajoute donc 1 a seven
+        finish(plateau,base); // ON vérifie si le plateau n'est pas complet
+      });
+    }
+  }
+  else{
+    window.alert("Vous avez déjà cliqué, veuillez appuyer sur Next")
+  }
 
 }
 var what=0;
@@ -107,12 +107,12 @@ var quizzy = function(a){//Fonction qui attribue les questions et reponses a cha
   var reponse1=document.getElementById("rep1");
   reponse1.value=rep[a][1];
   reponse1.addEventListener('click',answer);
-	var trep1=document.getElementById("textrep1");
+  var trep1=document.getElementById("textrep1");
   trep1.textContent=rep[a][0];
-	var reponse2=document.getElementById("rep2");
+  var reponse2=document.getElementById("rep2");
   reponse2.value=rep[a][3];
   reponse2.addEventListener('click',answer);
-	var trep2=document.getElementById("textrep2");
+  var trep2=document.getElementById("textrep2");
   trep2.textContent=rep[a][2];
   var radio3 =document.getElementById("rep3");
   radio3.addEventListener('click',answer);
@@ -122,7 +122,6 @@ var quizzy = function(a){//Fonction qui attribue les questions et reponses a cha
 
 // BLACKCAT //
 function random(){//Fonction qui permet de choisir de maniere aleatoire la carte qui va apparaitre
-  console.log(max,min);
   var idx=Math.floor(Math.random() * (max - min +1)) + min;
   while(id.includes(idx)===true){
     idx=Math.floor(Math.random() * (max - min +1)) + min;
@@ -137,24 +136,24 @@ function createImg(path) {
   return img;
 }
 
-function Score(index,sc){//Fonction qui permet de calculer le score du joueur et du croupier en fonction du nom de la carte 
+function Score(index,sc){//Fonction qui permet de calculer le score du joueur et du croupier en fonction du nom de la carte
   if(sc<42){//Condition du Marathon Jack
-      value=carte[index].search(/\d/);//Permet d'extraire la position du premier chiffre dans le nom de la carte
-      number=Number(carte[index][value]+carte[index][value+1]);//Permet d'obtenir la valeur (nombre) de la carte
-      if(number===1){//Specificite pour l'as
-	  if(sc+number>=42){
-	      sc=sc+1;
-	      return sc
-	  }
-	  else{
-	      sc=sc+11;
-	      return sc
-	  }
+    value=carte[index].search(/\d/);//Permet d'extraire la position du premier chiffre dans le nom de la carte
+    number=Number(carte[index][value]+carte[index][value+1]);//Permet d'obtenir la valeur (nombre) de la carte
+    if(number===1){ //Specificite pour l'as
+      if(sc+number>=42){
+        sc=sc+1;
+        return sc
       }
-      else{//Ajoute la valeur de la carte au score du joueur
-    sc=sc+Number(carte[index][value]+carte[index][value+1]);
-	  return sc
+      else{
+        sc=sc+11;
+        return sc
       }
+    }
+    else{ //Ajoute la valeur de la carte au score du joueur
+      sc=sc+Number(carte[index][value]+carte[index][value+1]);
+      return sc
+    }
   }
   else if(sc>42){
     window.alert("Défaite");
@@ -163,7 +162,7 @@ function Score(index,sc){//Fonction qui permet de calculer le score du joueur et
 }
 
 
-var startagain=function(){//Fonction qui relance le jeu a chaque fois que l'on appuie sur le bouton startagain mais aussi lorsqu'il y a une nouvelle tentative 
+var startagain=function(){//Fonction qui relance le jeu a chaque fois que l'on appuie sur le bouton startagain mais aussi lorsqu'il y a une nouvelle tentative
   var divJ = document.getElementById("Joueur");
   var longueur = divJ.childNodes.length;
   for (var k = 3; k<longueur;k++){ //Retire toutes les cartes de la tentatives précédentes
@@ -174,7 +173,7 @@ var startagain=function(){//Fonction qui relance le jeu a chaque fois que l'on a
   for (var k = 3; k<longueur;k++){
     divC.removeChild(divC.childNodes[3]);
   }
-    //Remise a zero de toutes les variables initiales
+  //Remise a zero de toutes les variables initiales
   imgD=document.getElementById("dealer");
   imgJ=document.getElementById("your");
   id=[];
@@ -202,7 +201,7 @@ var startagain=function(){//Fonction qui relance le jeu a chaque fois que l'on a
     attempt=1;
     var life = document.getElementById("life");
     life.textContent=3-attempt;
-    play(1,attempt);//Reactive l'arbre de mini jeux et desactive le mini jeu en cours 
+    play(1,attempt);//Reactive l'arbre de mini jeux et desactive le mini jeu en cours
   }
 }
 
@@ -210,72 +209,72 @@ function addImgInDiv() {//Fonction qui ajoute les cartes a chaque fois que le jo
   if(id.length!==52){
     if(this.id==="Stay"){//Si on clique sur le bouton Stay
       while(scoreD<score===true){//Ajoute des cartes au croupier. Le croupier est programme pour qu'il est toujours un score plus haut que le joueur
-        idxD=random();
-        var pathC = "Img/arriere.png";
-        var newImgC = createImg(pathC);
-        var divC = document.getElementById("Croupier");
-        var scored=document.getElementById("score_croupier");
-        divC.appendChild(newImgC);
-        scoreD=Score(idxD,scoreD);
-        nbCardD++;
-      }
-      var scored = document.getElementById("score_croupier");
-      scored.textContent=scoreD;
-      if(scoreD<42 && score<42){
-        if(scoreD<score){
-          window.alert("Congratulations");
-          startagain();
-          play(1,[1,attempt]);
-        }
-        else if(score===scoreD){
-          window.alert("Congratulations");
-          startagain();
-          play(1,[1,attempt]);
-        }
-        else{
-          window.alert("Defaite");
-          startagain();
-        }
-      }
-      else if(scoreD>42 && score<42){
-        window.alert("Défaite du Croupier \n Vous avez gagné")
-        startagain();
-        play(1,[1,attempt]);
-      }
-      else if(scoreD===42 && score<42){
-        window.alert("Victoire du croupier \n Défaite")
-        startagain();
-      }
-      else{
-        window.alert("Défaite du Croupier")
-        startagain();
-        play(1,[1,attempt]);
-      }
+      idxD=random();
+      var pathC = "Img/arriere.png";
+      var newImgC = createImg(pathC);
+      var divC = document.getElementById("Croupier");
+      var scored=document.getElementById("score_croupier");
+      divC.appendChild(newImgC);
+      scoreD=Score(idxD,scoreD);
+      nbCardD++;
     }
-    else if(this.id==="Card"){//Ajoute une carte au joueur
-      idxJ=random();
-      var pathJ = carte[idxJ];
-      var newImgJ = createImg(pathJ);
-      var divJ = document.getElementById("Joueur");
-      var scorej=document.getElementById("score_joueur");
-      divJ.appendChild(newImgJ);
-      score=Score(idxJ,score);
-      scorej.textContent=score;
-      nbCardJ++;
-      if(score===42){
+    var scored = document.getElementById("score_croupier");
+    scored.textContent=scoreD;
+    if(scoreD<42 && score<42){
+      if(scoreD<score){
         window.alert("Congratulations");
         startagain();
-        play(6.1,[1,attempt_pfc]);
+        play(1,[1,attempt]);
       }
-      else if(score>42){
+      else if(score===scoreD){
+        window.alert("Congratulations");
+        startagain();
+        play(1,[1,attempt]);
+      }
+      else{
         window.alert("Defaite");
         startagain();
       }
     }
+    else if(scoreD>42 && score<42){
+      window.alert("Défaite du Croupier \n Vous avez gagné")
+      startagain();
+      play(1,[1,attempt]);
+    }
+    else if(scoreD===42 && score<42){
+      window.alert("Victoire du croupier \n Défaite")
+      startagain();
+    }
+    else{
+      window.alert("Défaite du Croupier")
+      startagain();
+      play(1,[1,attempt]);
+    }
+  }
+  else if(this.id==="Card"){//Ajoute une carte au joueur
+    idxJ=random();
+    var pathJ = carte[idxJ];
+    var newImgJ = createImg(pathJ);
+    var divJ = document.getElementById("Joueur");
+    var scorej=document.getElementById("score_joueur");
+    divJ.appendChild(newImgJ);
+    score=Score(idxJ,score);
+    scorej.textContent=score;
+    nbCardJ++;
+    if(score===42){
+      window.alert("Congratulations");
+      startagain();
+      play(6.1,[1,attempt_pfc]);
+    }
+    else if(score>42){
+      window.alert("Defaite");
+      startagain();
+    }
   }
 }
+}
 
-function blackcat(){//Fonction qui etablie les evenements lies aux elements de la page 
+function blackcat(){//Fonction qui etablie les evenements lies aux elements de la page
   var imgD=document.getElementById("dealer");
   var imgJ=document.getElementById("your");
   var life = document.getElementById("life");
@@ -286,7 +285,7 @@ function blackcat(){//Fonction qui etablie les evenements lies aux elements de l
   idxJ=random();
   imgJ.src=carte[idxJ];
   score=Score(idxJ,score);
-  var scoreJ=document.getElementById("score_joueur");//Mise a jour du score 
+  var scoreJ=document.getElementById("score_joueur");//Mise a jour du score
   scoreJ.textContent=score;
   var newcard=document.getElementById("Card");//Clique sur le bouton Card
   newcard.addEventListener("click",addImgInDiv);
@@ -303,8 +302,7 @@ var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png",
 "Img/VT10.png","Img/T5.png"]//Variabale avec toutes les noms de cartes
 var id=[];//Variable qui contient tous les index generes aleatoirement par random
 var min=0;
-var max=carte.length-1;//Nombre de carte dans la variable choix 
-console.log(max);
+var max=carte.length-1;//Nombre de carte dans la variable choix
 var score=0;//Score du joueur
 var scoreD=0;//Score du croupier
 var value=0;
@@ -322,10 +320,10 @@ function createImg_memory(path) { // Fonction qui permettre de créer les images
   img.src = "Img/memory/cat.png";
   img.style.width="15%";
   img.onclick=function(){ // Cette partie ajoute un évennement à l'image, si on clique dessus alors on fait appel a memory et verif
-    memory(path);
-    verif();
-  };
-  return img;
+  memory(path);
+  verif();
+};
+return img;
 }
 var retourner=function(){ // Cette fonction permet de savoir si les images retournées par l'uttilisateur sont identiques ou non
   var txt = document.getElementById("res");
@@ -352,13 +350,13 @@ var restart_meowmory=function(){ // Cette fonction sera uttilisée pour remettre
     div.removeChild(div.childNodes[0]);
   }
   chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
-    "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
+  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"];
   memories(chats); // On replace les cartes dans un ordre aléatoire
   var un = document.getElementById("un");
   un.src="Img/memory/cat.png";
@@ -442,111 +440,111 @@ var memories = function(chats){ // Cette fonction permet de créer le plateau av
 coups=0 // Nombre de cou au départ pour le joueur
 list=[]; // Liste des cartes retournées
 chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir1.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
-  "https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"]; // listes de images qui sont en doubles
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai1.png",
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco1.png",
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph1.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton1.png",
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ben2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/bir2.png",
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/cha2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/cor2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/mai2.png",
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/mun2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/per2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sco2.png",
+"https://marinaboudin.github.io/BLACK-JACK/Img/memory/sia2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/sph2.png","https://marinaboudin.github.io/BLACK-JACK/Img/memory/ton2.png"]; // listes de images qui sont en doubles
 
 
 //Cat Human Mouse//
 
-function random_pfc(m){//Genere aleatoire un nombre qui correspondera a une carte dans la variable choix, de plus on enleve le choix effectue. 
-    var idx=Math.floor(Math.random()*(m));
-    var choose=choix[idx];
-    choix.splice(idx,1);
-    return choose;
+function random_pfc(m){//Genere aleatoire un nombre qui correspondera a une carte dans la variable choix, de plus on enleve le choix effectue.
+  var idx=Math.floor(Math.random()*(m));
+  var choose=choix[idx];
+  choix.splice(idx,1);
+  return choose;
 }
 
-function createImg_pfc(path) {//Permet de creer une nouvelle image representant les cartes. On attribue automatique la classe Carte. 
-    var img = document.createElement('img');
-    img.src = path;
-    img.className="Carte";
-    return img;
+function createImg_pfc(path) {//Permet de creer une nouvelle image representant les cartes. On attribue automatique la classe Carte.
+  var img = document.createElement('img');
+  img.src = path;
+  img.className="Carte";
+  return img;
 }
 
-function done(y,img){//Fonction effectue a chaque tour du pierre feuille ciseau. On enleve les cartes jouees au joueur et a l'ordinateur, on les mets alors dans la zone des mouvements precedents. 
-    var path2=y.src;
-    var newImg=createImg_pfc(img);
-    var newImg2=createImg_pfc(path2);
-    var div=document.getElementById("mvt");
-    div.appendChild(newImg2);
-    div.appendChild(newImg);
-    y.parentNode.removeChild(y);//Enleve la carte jouee
-    var com=document.getElementById(x.toString());
-    com.parentNode.removeChild(com);
-    x=x-1;
-    var sc=document.getElementById("score_pfc");
-    sc.textContent=score_pfc;
-    var sc2=document.getElementById("score_pc");
-    sc2.textContent=pc;
-    max_pfc=max_pfc-1;
+function done(y,img){ //Fonction effectue a chaque tour du pierre feuille ciseau. On enleve les cartes jouees au joueur et a l'ordinateur, on les mets alors dans la zone des mouvements precedents.
+  var path2=y.src;
+  var newImg=createImg_pfc(img);
+  var newImg2=createImg_pfc(path2);
+  var div=document.getElementById("mvt");
+  div.appendChild(newImg2);
+  div.appendChild(newImg);
+  y.parentNode.removeChild(y);//Enleve la carte jouee
+  var com=document.getElementById(x.toString());
+  com.parentNode.removeChild(com);
+  x=x-1;
+  var sc=document.getElementById("score_pfc");
+  sc.textContent=score_pfc;
+  var sc2=document.getElementById("score_pc");
+  sc2.textContent=pc;
+  max_pfc=max_pfc-1;
 }
 
-function action(){//Fonction qui verifie a chaque clic (tour) qui gagne le tour et effectue les fonctions associees. 
-    if(score_pfc<2 && pc<2){
-	comp=random_pfc(max_pfc);//Choix effectue
-	if(this.id==="human"){
-	    var test="human";
-	    if(comp==="Img/PFC/chat.png"){
-		score_pfc=score_pfc+1;
-		done(this,comp);
-	    }
-	    else if(comp==="Img/PFC/mulot.png"){
-		pc=pc+1;
-		done(this,comp);
-	    }
-	    else if(comp==="Img/PFC/human.png"){
-		window.alert("Même carte, remise en jeu");
-	    }
-	}
-	else if(this.id==="chat"){
-	    var test="chat"
-	    if(comp==="Img/PFC/human.png"){
-		pc=pc+1;
-		done(this,comp);
-	    }
-	    else if(comp==="Img/PFC/mulot.png"){
-		score_pfc=score_pfc+1;
-		done(this,comp);
-	    }
-	    else if(comp==="Img/PFC/chat.png"){
-		window.alert("Même carte, remise en jeu");
-	    }
-	}
-	else if(this.id==="mulot"){
-	    var test="mulot"
-	    if(comp==="Img/PFC/human.png"){
-		score_pfc=score_pfc+1;
-		done(this,comp);
-	    }
-	    else if(comp==="Img/PFC/chat.png"){
-		pc=pc+1;
-		done(this,comp);
-	    }
-	    else if(comp==="Img/PFC/mulot.png"){
-		window.alert("Même carte, remise en jeu");
-	    }
-	}
-	if(pc===1 && score_pfc===1){
-	    window.alert("Egalité")
-	    restart_pfc("Egalite");
-	}
+function action(){//Fonction qui verifie a chaque clic (tour) qui gagne le tour et effectue les fonctions associees.
+  if(score_pfc<2 && pc<2){
+    comp=random_pfc(max_pfc);//Choix effectue
+    if(this.id==="human"){
+      var test="human";
+      if(comp==="Img/PFC/chat.png"){
+        score_pfc=score_pfc+1;
+        done(this,comp);
+      }
+      else if(comp==="Img/PFC/mulot.png"){
+        pc=pc+1;
+        done(this,comp);
+      }
+      else if(comp==="Img/PFC/human.png"){
+        window.alert("Même carte, remise en jeu");
+      }
     }
-    else if(score_pfc===2){
-	window.alert("Gagné");
-	restart_pfc("Win");
-	play(6.1,[1,attempt_pfc]);//Permet de relancer l'arbre de mini jeux et de fermer le mini jeux en cours. 
+    else if(this.id==="chat"){
+      var test="chat"
+      if(comp==="Img/PFC/human.png"){
+        pc=pc+1;
+        done(this,comp);
+      }
+      else if(comp==="Img/PFC/mulot.png"){
+        score_pfc=score_pfc+1;
+        done(this,comp);
+      }
+      else if(comp==="Img/PFC/chat.png"){
+        window.alert("Même carte, remise en jeu");
+      }
     }
-    else if(pc===2){
-	window.alert("Défaite")
-	restart_pfc("Defeat");
+    else if(this.id==="mulot"){
+      var test="mulot"
+      if(comp==="Img/PFC/human.png"){
+        score_pfc=score_pfc+1;
+        done(this,comp);
+      }
+      else if(comp==="Img/PFC/chat.png"){
+        pc=pc+1;
+        done(this,comp);
+      }
+      else if(comp==="Img/PFC/mulot.png"){
+        window.alert("Même carte, remise en jeu");
+      }
     }
+    if(pc===1 && score_pfc===1){
+      window.alert("Egalité")
+      restart_pfc("Egalite");
+    }
+  }
+  else if(score_pfc===2){
+    window.alert("Gagné");
+    restart_pfc("Win");
+    play(6.1,[1,attempt_pfc]);//Permet de relancer l'arbre de mini jeux et de fermer le mini jeux en cours.
+  }
+  else if(pc===2){
+    window.alert("Défaite")
+    restart_pfc("Defeat");
+  }
 }
 
-function restart_pfc(type){//Fonction qui relance le mini jeux a chaque tentative. 
+function restart_pfc(type){//Fonction qui relance le mini jeux a chaque tentative.
   var img=document.getElementById("1");
   img.parentNode.removeChild(img);
   var img1=document.getElementsByClassName("Carte");
@@ -554,19 +552,18 @@ function restart_pfc(type){//Fonction qui relance le mini jeux a chaque tentativ
   var divC=document.getElementById("Cc");
   var path="Img/PFC/arriere.png";
   for(var k=0;k<3;k++){//On creait de nouveau les cartes de l'ordinateur
-    var newImg=createImg_pfc(path);
-    var id=k+1
-    newImg.id=id.toString();
-    divC.appendChild(newImg);
-  }
-    var divJ=document.getElementById("Yc");
-    //On creait de nouveau les cartes du jouer 
+  var newImg=createImg_pfc(path);
+  var id=k+1
+  newImg.id=id.toString();
+  divC.appendChild(newImg);}
+  var divJ=document.getElementById("Yc");
+  //On creait de nouveau les cartes du jouer
   var path1="Img/PFC/chat.png";
   var path2="Img/PFC/mulot.png";
   var path3="Img/PFC/human.png";
   var nI1=createImg_pfc(path1);
-  nI1.id="chat";//On determine l'id de chaque carte 
-  nI1.addEventListener("click",action);//On ajoute un evenement aux cartes du joueur. 
+  nI1.id="chat";//On determine l'id de chaque carte
+  nI1.addEventListener("click",action);//On ajoute un evenement aux cartes du joueur.
   divJ.appendChild(nI1);
   var nI2=createImg_pfc(path2);
   nI2.id="mulot";
@@ -590,34 +587,35 @@ function restart_pfc(type){//Fonction qui relance le mini jeux a chaque tentativ
   sc.textContent=score_pfc;
   var sc2=document.getElementById("score_pc");
   sc2.textContent=pc;
-  if(type!="Egalite"){//Si il n'y a pas egalite entre le joueur et l'ordinateur alors on effectue une nouvelle tentative, le nombre de point que le joueur peut gagner change. 
-      attempt_pfc=attempt_pfc+1;
+  //Si il n'y a pas egalite entre le joueur et l'ordinateur alors on effectue une nouvelle tentative, le nombre de point que le joueur peut gagner change.
+  if(type!="Egalite"){
+    attempt_pfc=attempt_pfc+1;
+    var life_pfc = document.getElementById("life_pfc");
+    life_pfc.textContent=3-attempt_pfc;
+    if (attempt_pfc===4){
+      attempt_pfc=1;
       var life_pfc = document.getElementById("life_pfc");
       life_pfc.textContent=3-attempt_pfc;
-      if (attempt_pfc===4){
-	  attempt_pfc=1;
-	  var life_pfc = document.getElementById("life_pfc");
-	  life_pfc.textContent=3-attempt_pfc;
-	  play(1,attempt_pfc);
-      }
+      play(1,attempt_pfc);
+    }
   }
   seven++; // Le jeu est fini on ajoute donc 1 a seven
   finish(plateau,base); // ON vérifie si le plateau n'est pas complet
 }
 
 function pfc(){//Evenement du pierre feuille ciseaux
-    var joueur=document.getElementsByClassName("Carte");
-    joueur[0].addEventListener("click",action);
-    joueur[1].addEventListener("click",action);
-    joueur[2].addEventListener("click",action);
+  var joueur=document.getElementsByClassName("Carte");
+  joueur[0].addEventListener("click",action);
+  joueur[1].addEventListener("click",action);
+  joueur[2].addEventListener("click",action);
 }
 
-var choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]//Variable contenant les cartes 
+var choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]//Variable contenant les cartes
 var max_pfc=choix.length;
 var x=3;
 var score_pfc=0;//Score du joueur
-var pc=0;//Score de l'ordinateur 
-var attempt_pfc=1;//Nb de tentative 
+var pc=0;//Score de l'ordinateur
+var attempt_pfc=1;//Nb de tentative
 
 // MAIN //
 var finish=function(plateau,base){ // Cette fonction vérifie si le jeu a été fini ou non
@@ -627,90 +625,90 @@ var finish=function(plateau,base){ // Cette fonction vérifie si le jeu a été 
   }
 }
 var player = function(plateau){ // Cette fonction permet d'avoir la position du joueur dans le plateau
-  for (var k = 0;k<=11;k++){ // Pour chaque ligne du plateau
-    var lign = plateau[k];
-    if (lign.indexOf(2)!=-1){ // Si 2 existe dans la ligne alors
-      var ligne = k; // On stock la valeur de ligne
-      var colonne = lign.indexOf(2);// et celle de la colonne
-    }
+for (var k = 0;k<=11;k++){ // Pour chaque ligne du plateau
+  var lign = plateau[k];
+  if (lign.indexOf(2)!=-1){ // Si 2 existe dans la ligne alors
+    var ligne = k; // On stock la valeur de ligne
+    var colonne = lign.indexOf(2);// et celle de la colonne
   }
-  return [ligne,colonne]; // On retourne les positions
+}
+return [ligne,colonne]; // On retourne les positions
 }
 var movetop = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers le haut
   var pos = player(plateau);
   var new_position = plateau[pos[0]-1][pos[1]];
   if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
-    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
-      condition=[plateau[pos[0]-1][pos[1]][0],plateau[pos[0]-1][pos[1]][1]];
-    }
-    else{
-      condition=new_position;
-    }
-    plateau[pos[0]-1][pos[1]] = 2;
-    plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]]; // L'ancienne position reprend sa valeur de base dans base
-    affichage(plateau); // On réactualise le plateau à chaque mouvement
-    if (condition!=1){
-      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
-    }
+  if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
+    condition=[plateau[pos[0]-1][pos[1]][0],plateau[pos[0]-1][pos[1]][1]];
   }
+  else{
+    condition=new_position;
+  }
+  plateau[pos[0]-1][pos[1]] = 2;
+  plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]]; // L'ancienne position reprend sa valeur de base dans base
   affichage(plateau); // On réactualise le plateau à chaque mouvement
+  if (condition!=1){
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+  }
+}
+affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
 var movebottom = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers le bas
   var pos = player(plateau);
   var new_position = plateau[pos[0]+1][pos[1]];
   if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
-    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
-      condition=[plateau[pos[0]+1][pos[1]][0],plateau[pos[0]+1][pos[1]][1]];
-    }
-    else{
-      condition=new_position;
-    }
-    plateau[pos[0]+1][pos[1]] = 2;
-    plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau); // On réactualise le plateau à chaque mouvement
-    if (condition!=1){
-      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
-    }
+  if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
+    condition=[plateau[pos[0]+1][pos[1]][0],plateau[pos[0]+1][pos[1]][1]];
   }
+  else{
+    condition=new_position;
+  }
+  plateau[pos[0]+1][pos[1]] = 2;
+  plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   affichage(plateau); // On réactualise le plateau à chaque mouvement
+  if (condition!=1){
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+  }
+}
+affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
 var moveleft = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers la gauche
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]-1];
   if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
-    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
-      condition=[plateau[pos[0]][pos[1]-1][0],plateau[pos[0]][pos[1]-1][1]];
-    }
-    else{
-      condition=new_position;
-    }
-    plateau[pos[0]][pos[1]-1] = 2;
-    plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau); // On réactualise le plateau à chaque mouvement
-    if (condition!=1){
-      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
-    }
+  if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
+    condition=[plateau[pos[0]][pos[1]-1][0],plateau[pos[0]][pos[1]-1][1]];
   }
+  else{
+    condition=new_position;
+  }
+  plateau[pos[0]][pos[1]-1] = 2;
+  plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   affichage(plateau); // On réactualise le plateau à chaque mouvement
+  if (condition!=1){
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+  }
+}
+affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
 var moveright = function(plateau,base){ // Cette fonction permet de déplacer le joueur vers la droite
   var pos = player(plateau);
   var new_position = plateau[pos[0]][pos[1]+1];
   if (new_position!=0){ // Le personnage bouge seuelement si la nouvelle position n'est pas une case vide, égale à 0
-    if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
-      condition=[plateau[pos[0]][pos[1]+1][0],plateau[pos[0]][pos[1]+1][1]];
-    }
-    else{
-      condition=new_position;
-    }
-    plateau[pos[0]][pos[1]+1] = 2;
-    plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
-    affichage(plateau); // On réactualise le plateau à chaque mouvement
-    if (condition!=1){
-      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
-    }
+  if ((typeof new_position)=="object"){ // Condition respectée seulement dans le cadre du quizzy cat
+    condition=[plateau[pos[0]][pos[1]+1][0],plateau[pos[0]][pos[1]+1][1]];
   }
+  else{
+    condition=new_position;
+  }
+  plateau[pos[0]][pos[1]+1] = 2;
+  plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
   affichage(plateau); // On réactualise le plateau à chaque mouvement
+  if (condition!=1){
+    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+  }
+}
+affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
 
 var play = function(type,points){ // Cette fonction permet de coordonner les différents jeux et affichages
@@ -768,7 +766,7 @@ var play = function(type,points){ // Cette fonction permet de coordonner les dif
     finish(plateau,base); // ON vérifie si le plateau n'est pas complet
   }
 }
-    
+
 var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre à chat
   var tree = document.getElementById("gameboard");
   if (tree.style.display!='none'){
@@ -806,7 +804,7 @@ var affichage = function(plateau){ // Cette fonction permet d'afficher l'arbre �
         else if (column===6){ // Si la valeur est de 6 alors c'est une partie de cat mhuman mouse qui sera rose pale.
           canvas_grid.style.backgroundColor="#D2B48C";
         }
-        else if ((typeof column)=="object"){ // SI c'est un object alors c'est le questionnaire
+        else if ((typeof column)=="object"){ // Si c'est un object alors c'est le questionnaire
           if (column[0]===3) { // La couleur de la case sera donc violette
             canvas_grid.style.backgroundColor="#7300e6";
           }
