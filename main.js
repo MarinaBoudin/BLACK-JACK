@@ -236,7 +236,7 @@ function addImgInDiv() {
       }
       else if(scoreD===42 && score<42){
         window.alert("Victoire du croupier \n Défaite")
-	startagain();
+        startagain();
       }
       else{
         window.alert("Défaite du Croupier")
@@ -452,14 +452,14 @@ chats=["https://marinaboudin.github.io/BLACK-JACK/Img/memory/bal1.png","https://
 
 //Cat Human Mouse//
 
-/*function random_pfc(m){
+function random_pfc(m){
     var idx=Math.floor(Math.random()*(m));
     var choose=choix[idx];
     choix.splice(idx,1);
     return choose;
 }
 
-function createImg(path) {
+function createImg_pfc(path) {
     var img = document.createElement('img');
     img.src = path;
     img.className="Carte";
@@ -468,8 +468,8 @@ function createImg(path) {
 
 function done(y,img){
     var path2=y.src;
-    var newImg=createImg(img);
-    var newImg2=createImg(path2);
+    var newImg=createImg_pfc(img);
+    var newImg2=createImg_pfc(path2);
     var div=document.getElementById("res");
     div.appendChild(newImg2);
     div.appendChild(newImg);
@@ -531,7 +531,7 @@ function action(){
 	}
 	if(pc===1 && score===1){
 	    window.alert("Egalité")
-	    restart();
+	    restart_pfc();
 	}
     }
     else if(score===2){
@@ -539,11 +539,11 @@ function action(){
     }
     else if(pc===2){
 	window.alert("Défaite")
-	restart();
+	restart_pfc();
     }
 }
 
-function restart(){
+function restart_pfc(){
     var img=document.getElementById("1");
     img.parentNode.removeChild(img);
     var img1=document.getElementsByClassName("Carte");
@@ -551,7 +551,7 @@ function restart(){
     var divC=document.getElementById("Cc");
     var path="Img/PFC/arriere.png";
     for(var k=0;k<3;k++){
-	var newImg=createImg(path);
+	var newImg=createImg_pfc(path);
 	var id=k+1
 	newImg.id=id.toString();
 	divC.appendChild(newImg);
@@ -560,15 +560,15 @@ function restart(){
     var path1="Img/PFC/chat.png";
     var path2="Img/PFC/mulot.png";
     var path3="Img/PFC/human.png";
-    var nI1=createImg(path1);
+    var nI1=createImg_pfc(path1);
     nI1.id="chat";
     nI1.addEventListener("click",action);
     divJ.appendChild(nI1);
-    var nI2=createImg(path2);
+    var nI2=createImg_pfc(path2);
     nI2.id="mulot";
     nI2.addEventListener("click",action);
     divJ.appendChild(nI2);
-    var nI3=createImg(path3);
+    var nI3=createImg_pfc(path3);
     nI3.id="human";
     nI3.addEventListener("click",action);
     divJ.appendChild(nI3);
@@ -600,7 +600,6 @@ var max=choix.length;
 var x=3;
 var score=0;
 var pc=0;
-*/
 
 // MAIN //
 var player = function(plateau){
@@ -715,6 +714,13 @@ var play = function(type,points){
     meowmory.style.display="block";
     memories();
   }
+  else if (type===6){
+    var gameboard = document.getElementById("gameboard");
+    var pifeci = document.getElementById("PFC");
+    gameboard.style.display="none";
+    pifeci.style.display="block";
+    pfc();
+  }
 }
 var affichage = function(plateau){
   var tree = document.getElementById("gameboard");
@@ -750,15 +756,12 @@ var affichage = function(plateau){
         else if (column===5){
           canvas_grid.style.backgroundColor="#39ac73";
         }
+        else if (column===6){
+          canvas_grid.style.backgroundColor="green";
+        }
         else if ((typeof column)=="object"){
           if (column[0]===3) {
             canvas_grid.style.backgroundColor="#7300e6";
-          }
-          else if (column[0]==5){
-            canvas_grid.style.backgroundColor="#4c4c34";
-          }
-          else if (column[0]==6){
-            canvas_grid.style.backgroundColor="#3d3d29";
           }
         }
         canvas_grid.style.width="50px";
@@ -781,9 +784,11 @@ var setupListener = function(plateau,base){
   var jack = document.getElementById("quizz");
   var quizz = document.getElementById("blackcat");
   var Meowmory=document.getElementById("Meowmory");
+  var pifeci=document.getElementById("PFC");
   jack.style.display="none";
   quizz.style.display="none";
   Meowmory.style.display="none";
+  pifeci.style.display="none";
 }
 var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,[3,6],0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,[3,1],0,0,0,0],
@@ -794,7 +799,7 @@ var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,1,1,4,1,1,5,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,5,1,1,[3,2],1,1,4,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,5,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,6,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
