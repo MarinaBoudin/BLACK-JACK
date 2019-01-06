@@ -44,6 +44,8 @@ var answer = function(a){
       var quizz = document.getElementById("quizz");
       gameboard.style.display="block";
       quizz.style.display="none";
+      seven++;
+      finish(plateau,base);
     });
   }
   else if(this.value==="Non"){
@@ -57,6 +59,8 @@ var answer = function(a){
       var quizz = document.getElementById("quizz");
       gameboard.style.display="block";
       quizz.style.display="none";
+      seven++;
+      finish(plateau,base);
     });
   }
   else if (this.value==="IDK"){
@@ -69,6 +73,8 @@ var answer = function(a){
       var quizz = document.getElementById("quizz");
       gameboard.style.display="block";
       quizz.style.display="none";
+      seven++;
+      finish(plateau,base);
     });
   }
     }
@@ -116,6 +122,7 @@ var quizzy = function(a){
 
 // BLACKCAT //
 function random(){
+  console.log(max,min);
   var idx=Math.floor(Math.random() * (max - min +1)) + min;
   while(id.includes(idx)===true){
     idx=Math.floor(Math.random() * (max - min +1)) + min;
@@ -296,6 +303,7 @@ var carte=["Img/AK1.png","Img/AP1.png","Img/AT1.png","Img/AC1.png","Img/C2.png",
 var id=[];
 var min=0;
 var max=carte.length-1;
+console.log(max);
 var score=0;
 var scoreD=0;
 var value=0;
@@ -363,6 +371,8 @@ var restart_meowmory=function(){ // Cette fonction sera uttilisée pour remettre
   var meowmory = document.getElementById("Meowmory");
   gameboard.style.display="block";
   meowmory.style.display="none";
+  seven++;
+  finish(plateau,base);
 }
 var verif=function(){ // Cette fonction va vérifier à quelle moment le jeu en est et éffectuer les actions requises
   var cards=document.getElementsByClassName("card"); // On calcule tout d'abord le nombre de cartes retournées sur le plateau
@@ -471,12 +481,12 @@ function done(y,img){
     sc.textContent=score_pfc;
     var sc2=document.getElementById("score_pc");
     sc2.textContent=pc;
-    max=max-1;
+    max_pfc=max_pfc-1;
 }
 
 function action(){
     if(score<2 && pc<2){
-	comp=random_pfc(max);
+	comp=random_pfc(max_pfc);
 	if(this.id==="human"){
 	    var test="human";
 	    if(comp==="Img/PFC/chat.png"){
@@ -534,48 +544,50 @@ function action(){
 }
 
 function restart_pfc(){
-    var img=document.getElementById("1");
-    img.parentNode.removeChild(img);
-    var img1=document.getElementsByClassName("Carte");
-    img1[0].parentNode.removeChild(img1[0]);
-    var divC=document.getElementById("Cc");
-    var path="Img/PFC/arriere.png";
-    for(var k=0;k<3;k++){
-	var newImg=createImg_pfc(path);
-	var id=k+1
-	newImg.id=id.toString();
-	divC.appendChild(newImg);
-    }
-    var divJ=document.getElementById("Yc");
-    var path1="Img/PFC/chat.png";
-    var path2="Img/PFC/mulot.png";
-    var path3="Img/PFC/human.png";
-    var nI1=createImg_pfc(path1);
-    nI1.id="chat";
-    nI1.addEventListener("click",action);
-    divJ.appendChild(nI1);
-    var nI2=createImg_pfc(path2);
-    nI2.id="mulot";
-    nI2.addEventListener("click",action);
-    divJ.appendChild(nI2);
-    var nI3=createImg_pfc(path3);
-    nI3.id="human";
-    nI3.addEventListener("click",action);
-    divJ.appendChild(nI3);
-    var divR=document.getElementById("mvt");
-    var longueur=divR.childNodes.length;
-    for(var k=3;k<longueur;k++){
-	divR.removeChild(divR.childNodes[3]);
-    }
-    choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]
-    max=choix.length;
-    x=3;
-    score=0;
-    pc=0;
-    var sc=document.getElementById("score_pfc");
-    sc.textContent=score_pfc;
-    var sc2=document.getElementById("score_pc");
-    sc2.textContent=pc;
+  var img=document.getElementById("1");
+  img.parentNode.removeChild(img);
+  var img1=document.getElementsByClassName("Carte");
+  img1[0].parentNode.removeChild(img1[0]);
+  var divC=document.getElementById("Cc");
+  var path="Img/PFC/arriere.png";
+  for(var k=0;k<3;k++){
+    var newImg=createImg_pfc(path);
+    var id=k+1
+    newImg.id=id.toString();
+    divC.appendChild(newImg);
+  }
+  var divJ=document.getElementById("Yc");
+  var path1="Img/PFC/chat.png";
+  var path2="Img/PFC/mulot.png";
+  var path3="Img/PFC/human.png";
+  var nI1=createImg_pfc(path1);
+  nI1.id="chat";
+  nI1.addEventListener("click",action);
+  divJ.appendChild(nI1);
+  var nI2=createImg_pfc(path2);
+  nI2.id="mulot";
+  nI2.addEventListener("click",action);
+  divJ.appendChild(nI2);
+  var nI3=createImg_pfc(path3);
+  nI3.id="human";
+  nI3.addEventListener("click",action);
+  divJ.appendChild(nI3);
+  var divR=document.getElementById("mvt");
+  var longueur=divR.childNodes.length;
+  for(var k=3;k<longueur;k++){
+    divR.removeChild(divR.childNodes[3]);
+  }
+  choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]
+  max_pfc=choix.length;
+  x=3;
+  score=0;
+  pc=0;
+  var sc=document.getElementById("score_pfc");
+  sc.textContent=score_pfc;
+  var sc2=document.getElementById("score_pc");
+  sc2.textContent=pc;
+  seven++;
+  finish(plateau,base);
 }
 
 function pfc(){
@@ -586,12 +598,19 @@ function pfc(){
 }
 
 var choix=["Img/PFC/human.png","Img/PFC/chat.png","Img/PFC/mulot.png"]
-var max=choix.length;
+var max_pfc=choix.length;
 var x=3;
 var score_pfc=0;
 var pc=0;
 
 // MAIN //
+var finish=function(plateau,base){
+  console.log(seven);
+  if (seven===34){
+    window.alert(`Ton score est de ${goal}/77. Le jeu est fini bravo !`);
+    location.reload();
+  }
+}
 var player = function(plateau){ // Cette fonction permet d'avoir la position du joueur dans le plateau
   for (var k = 0;k<=11;k++){ // Pour chaque ligne du plateau
     var lign = plateau[k];
@@ -615,7 +634,9 @@ var movetop = function(plateau,base){ // Cette fonction permet de déplacer le j
     plateau[pos[0]-1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]]; // L'ancienne position reprend sa valeur de base dans base
     affichage(plateau); // On réactualise le plateau à chaque mouvement
-    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    if (condition!=1){
+      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    }
   }
   affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
@@ -632,7 +653,9 @@ var movebottom = function(plateau,base){ // Cette fonction permet de déplacer l
     plateau[pos[0]+1][pos[1]] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau); // On réactualise le plateau à chaque mouvement
-    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    if (condition!=1){
+      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    }
   }
   affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
@@ -649,7 +672,9 @@ var moveleft = function(plateau,base){ // Cette fonction permet de déplacer le 
     plateau[pos[0]][pos[1]-1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau); // On réactualise le plateau à chaque mouvement
-    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    if (condition!=1){
+      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    }
   }
   affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
@@ -666,7 +691,9 @@ var moveright = function(plateau,base){ // Cette fonction permet de déplacer le
     plateau[pos[0]][pos[1]+1] = 2;
     plateau[pos[0]][pos[1]]=base[pos[0]][pos[1]];
     affichage(plateau); // On réactualise le plateau à chaque mouvement
-    play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    if (condition!=1){
+      play(condition,0); // Condition permet de savoir quel jeu lancé selon la valeur de condition
+    }
   }
   affichage(plateau); // On réactualise le plateau à chaque mouvement
 }
@@ -696,6 +723,8 @@ var play = function(type,points){ // Cette fonction permet de coordonner les dif
     attempt=1; //  On remet à éro le nombre de tentatives du joueur pour le prochain black_cat
     score=0; // On remet son score à zéro
     scoreD=0; // ainsi que celui du croupier
+    seven++;
+    finish(plateau,base);
   }
   else if (type===5){ // Ici on lance le meowmory
     var gameboard = document.getElementById("gameboard");
@@ -780,6 +809,7 @@ var setupListener = function(plateau,base){ // Cette fonction coordonne les éve
   Meowmory.style.display="none";
   pifeci.style.display="none";
 }
+seven=0;
 var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,[3,6],0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,[3,1],0,0,0,0],
 [0,0,1,5,1,6,1,0,0,0,0,0,0,0,0,[3,5],0,0,0,5,0,0,1,6,1,4,1,0,0,0,0],
@@ -789,7 +819,7 @@ var plateau = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,[3,3],0,0,0,0,0,0,1,0,0,0,0,0,5,1,[3,7],1,6,1,4,1,1,5,0,0,0,0],
 [0,0,0,0,1,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,5,1,1,[3,2],1,1,4,1,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0,0,0,0,1,5,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,1,6,1,1,1,4,1,1,[3,0],1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]; // C'est le plateau de jeu avec tous les jeux qui sont placés
 var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -804,4 +834,4 @@ var base = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,1,7,1,1,1,7,1,1,7,1,1,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]; // C'est la base du plateau
-window.addEventListener("load",function(){setupListener(plateau,base)}); 
+window.addEventListener("load",function(){setupListener(plateau,base)});
