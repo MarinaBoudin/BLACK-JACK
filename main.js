@@ -484,64 +484,67 @@ function done(y,img){ //Fonction effectue a chaque tour du pierre feuille ciseau
 }
 
 function action(){//Fonction qui verifie a chaque clic (tour) qui gagne le tour et effectue les fonctions associees.
-  if(score_pfc<2 && pc<2){
     comp=random_pfc(max_pfc);//Choix effectue
-    if(this.id==="human"){
-      var test="human";
-      if(comp==="Img/PFC/chat.png"){
-        score_pfc=score_pfc+1;
-        done(this,comp);
-      }
-      else if(comp==="Img/PFC/mulot.png"){
-        pc=pc+1;
-        done(this,comp);
-      }
-      else if(comp==="Img/PFC/human.png"){
-        window.alert("Même carte, remise en jeu");
-      }
+    var path=this.src.split("BLACK-JACK/");
+    console.log(this.srcsplit);
+    var triggered=path[1];
+    while(triggered===comp){
+	comp=random_pfc(max_pfc);
     }
-    else if(this.id==="chat"){
-      var test="chat"
-      if(comp==="Img/PFC/human.png"){
-        pc=pc+1;
-        done(this,comp);
-      }
-      else if(comp==="Img/PFC/mulot.png"){
-        score_pfc=score_pfc+1;
-        done(this,comp);
-      }
-      else if(comp==="Img/PFC/chat.png"){
-        window.alert("Même carte, remise en jeu");
-      }
+    if(score_pfc<2 && pc<2){
+	if(this.id==="human"){
+	    if(comp==="Img/PFC/chat.png"){
+		score_pfc=score_pfc+1;
+		done(this,comp);
+	    }
+	    else if(comp==="Img/PFC/mulot.png"){
+		pc=pc+1;
+		done(this,comp);
+	    }
+	    else if(comp==="Img/PFC/human.png"){
+		window.alert("Même carte, remise en jeu");
+	    }
+	}
+	else if(this.id==="chat"){
+	    if(comp==="Img/PFC/human.png"){
+		pc=pc+1;
+		done(this,comp);
+	    }
+	    else if(comp==="Img/PFC/mulot.png"){
+		score_pfc=score_pfc+1;
+		done(this,comp);
+	    }
+	    else if(comp==="Img/PFC/chat.png"){
+		window.alert("Même carte, remise en jeu");
+	    }
+	}
+	else if(this.id==="mulot"){
+	    if(comp==="Img/PFC/human.png"){
+		score_pfc=score_pfc+1;
+		done(this,comp);
+	    }
+	    else if(comp==="Img/PFC/chat.png"){
+		pc=pc+1;
+		done(this,comp);
+	    }
+	    else if(comp==="Img/PFC/mulot.png"){
+		window.alert("Même carte, remise en jeu");
+	    }
+	}
+	if(pc===1 && score_pfc===1){
+	    window.alert("Egalité")
+	    restart_pfc("Egalite");
+	}
     }
-    else if(this.id==="mulot"){
-      var test="mulot"
-      if(comp==="Img/PFC/human.png"){
-        score_pfc=score_pfc+1;
-        done(this,comp);
-      }
-      else if(comp==="Img/PFC/chat.png"){
-        pc=pc+1;
-        done(this,comp);
-      }
-      else if(comp==="Img/PFC/mulot.png"){
-        window.alert("Même carte, remise en jeu");
-      }
+    else if(score_pfc===2){
+      window.alert("Gagné");
+	restart_pfc("Win");
+	play(6.1,[1,attempt_pfc]);//Permet de relancer l'arbre de mini jeux et de fermer le mini jeux en cours.
     }
-    if(pc===1 && score_pfc===1){
-      window.alert("Egalité")
-      restart_pfc("Egalite");
+    else if(pc===2){
+	window.alert("Défaite")
+	restart_pfc("Defeat");
     }
-  }
-  else if(score_pfc===2){
-    window.alert("Gagné");
-    restart_pfc("Win");
-    play(6.1,[1,attempt_pfc]);//Permet de relancer l'arbre de mini jeux et de fermer le mini jeux en cours.
-  }
-  else if(pc===2){
-    window.alert("Défaite")
-    restart_pfc("Defeat");
-  }
 }
 
 function restart_pfc(type){//Fonction qui relance le mini jeux a chaque tentative.
