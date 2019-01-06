@@ -98,8 +98,8 @@ button{
 }
 
 
-.body{
-  background-image:url("../Img/bacat.jpg");
+.pfc{
+  background-image:url("Img/bacat.jpg");
   color:black;
   font-family: "Comic Sans MS",sans-serif;
 }
