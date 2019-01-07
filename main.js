@@ -264,7 +264,7 @@ function addImgInDiv() {//Fonction qui ajoute les cartes a chaque fois que le jo
     if(score===42){
       window.alert("Congratulations");
       startagain();
-      play(6.1,[1,attempt_pfc]);
+      play(1,[1,attempt_pfc]);
     }
     else if(score>42){
       window.alert("Defaite");
