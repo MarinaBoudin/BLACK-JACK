@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Black-Cat</title>
+  <link rel="stylesheet" href="cat_tree.css">
+</head>
+<body style="background-color: black">
+  <div class="deco" id="blackcat">
+    <h1 class="title"> Marathon Cat</h1>
+    <div class="table">
+      <div class="info">
+        <h2>Dealer's cards :</h2>
+        <div id="Croupier">
+          <img class="card" src="" id="dealer">
+        </div>
+        <h2>Your cards : </h2>
+        <div id="Joueur">
+          <img class="card" src="" id="your">
+        </div>
+      </div>
+    </div>
+    <div class="bouttons">
+      <p class="regle" style="padding-top:1%">Gagne contre le croupier au black-jack avec 3 tentatives! Si tu gagnes du premier coup alors tu gagneras 3 points, du deuxième, 2 points, du troisième, 1 point sinon 0 ! Bonne chance !<br></br>Il te reste <span id="life">2</span> tentatives</p>
+      <p class="fin"> The dealer has <span id="score_croupier">0</span> points</p>
+      <p class="fin"> You have <span id="score_joueur">0</span> points. Card or stay ?</p>
+      <button type="submit" id="Card">Card</button>
+      <button type="submit" id="Stay">Stay</button>
+      <button type="submit" id="Start again">Start again</button>
+    </div>
+  </div>
+  <div class="deco" id="quizz">
+    <h1 class="title">Cat Quizzy</h1>
+    <div class="Zone">
+      <div id="Image">
+        <img class="omnia" id="omnia" src=""></img>
+      </div>
+      <div>
+        <p id="Question"></p>
+      </div>
+      <form action="">
+        <input type="radio" id="rep1" name="answer" value="Oui"><span id="textrep1"></span><br>
+        <input type="radio" id="rep2" name="answer" value="Non"><span id="textrep2"></span><br>
+        <input type="radio" id="rep3" name="answer" value="IDK">Je ne sais pas
+      </form>
+      <div class="Reponse">
+        <p id="rep"></p>
+      </div>
+    </div>
+    <div class="Button">
+      <button type="submit" id="Next" value="Next">Next</button>
+    </div>
+  </div>
+  <div id="gameboard" class="deco2">
+    <h1 class="treetitle"> Omnia's cat tree </h1>
+    <p class="regle"> Bienvenue dans Omnia's cat tree, voici l'arbre à chat des défis, il mèle <span style="color:#7300e6">questions sur les chats </span>, parties de <span style="color:#39ac73">meowmory</span>, parties de <span style="color:#D2B48C">chat-humain-mulot (revisite du pierre feuille ciseau)</span> et de <span style="color:#cc0000">black-cat</span> ! Réussi les défis avec le moins de coups possibles et gagne des points ! <br></br>Le score maximal possible est de 112 points ! Good luck !</p>
+    <button type="submit" id="Top">Top</button>
+    <button type="submit" id="Bottom">Bottom</button>
+    <button type="submit" id="Left">Left</button>
+    <button type="submit" id="Right">Right</button>
+    <div id="plateau" class="plateau">
+      <script src="cat_tree.js"></script>
+    </div>
+    <p class="regle"> Ton score : <span id="go">0</span></p>
+  </div>
+  <div id="Meowmory" class="deco2">
+    <h1 class="treetitle"> Le meowmory ! </h1>
+    <p class="regle">Trouve toutes les paires ! Si tu les trouve en moins de 50 coups alors tu gagneras 3 points, en moins de 100 coups, 2 points et 1 si plus ! Bonne chance !</p>
+    <p class="regle"> Nombre de coups :<span id="coups">0</span></p>
+    <div class="deco3">
+      <div id="cat" style="text-align: center;width:50%;margin-left:auto;margin-right:auto;float:left">
+      </div >
+      <div id="add" style="display:inline;float:right;text-align:center;margin-right:35%;width:15%;margin-top:2%">
+        <img id="un" src="Img/memory/cat.png" style="width:50%">
+        <p style="color:white">+</p>
+        <img id="deux" src="Img/memory/cat.png" style="width:50%">
+        <p style="color:white">=</p>
+        <p id="res" style="color:white">?</p>
+      </div>
+    </div>
+  </div>
+  <div id="PFC" class="pfc">
+    <h1 class="treetitle">CAT HUMAN MOUSE</h1>
+    <div class="zone">
+      <div id="Cc" class="ComputerCard">
+        <img id="1" src="Img/PFC/arriere.png">
+        <img id="2" src="Img/PFC/arriere.png">
+        <img id="3" src="Img/PFC/arriere.png">
+      </div>
+      <div id="Yc" class="YourCard">
+        <img class="Carte" id="human" src="Img/PFC/human.png">
+        <img class="Carte" id="chat" src="Img/PFC/chat.png">
+        <img class="Carte" id="mulot" src="Img/PFC/mulot.png">
+      </div>
+      <div id="mvt" class="res">
+        <h3>Mouvement Précédent</h2>
+      </div>
+        <div class="Res">
+          Il s'agit d'une adaptation du pierre feuille ciseaux. Pour gagner il faut gagné 2 points face à son adversaire. Vous avez trois tentatives afin de remporter des points. Gagné du premier coup : 3 points, du second : 2 points, du troisième : 1 point. Sinon c'est perdu ! Bonne chance. <br></br>Il te reste <span id="life_pfc">2</span> tentatives</p>
+          <p>Vous avez <span id="score_pfc">0</span> points !</p>
+          <p>L'ordinateur a <span id="score_pc">0</span> points !</p>
+        </div>
+        <div class="figure">
+          <img class="schema" src="Img/PFC/schema.png" alt="">
+        </div>
+      </div>
+    </div>
+  </body>
